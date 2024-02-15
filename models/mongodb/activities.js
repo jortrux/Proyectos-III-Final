@@ -30,6 +30,10 @@ const ActivitySchema = new mongoose.Schema(
             ref: 'User',
             required: true
         },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
         community: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Communities',
