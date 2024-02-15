@@ -31,6 +31,10 @@ const CommunitiesSchema = new mongoose.Schema(
             trim: true
         },
         createdBy: {
+            type: Date,
+            default: Date.now
+        },
+        createdAt: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true
