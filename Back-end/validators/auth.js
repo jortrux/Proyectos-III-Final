@@ -25,11 +25,34 @@ const validatorLogin = [
 
 const validatorCode = [
     check("id").exists().notEmpty(),
-    check("codigo").exists().notEmpty().isNumeric(),
+    check("recoveryCode").exists().notEmpty().isNumeric(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorPassword = [
+    check("email").exists().notEmpty().isEmail(),
+    check("newPassword").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorCode2 = [
+    check("email").exists().notEmpty().isEmail(),
+    check("recoveryCode").exists().notEmpty().isNumeric(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorEmail = [
+    check("email").exists().notEmpty().isEmail(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
 ]
 
 
-module.exports = { validatorRegister, validatorLogin, validatorCode }
+module.exports = { validatorRegister, validatorLogin, validatorCode, validatorPassword, validatorCode2, validatorEmail }
