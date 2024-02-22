@@ -74,10 +74,10 @@ const loginCtrl = async (req, res) => {
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
         }
-        else if(!user.resgister){
+        /*else if(!user.resgister){
             handleHttpError(res, "USER_NOT_REGISTER", 404)
             return
-        }
+        }*/
         
         const hashPassword = user.password;
         const check = await compare(req.password, hashPassword)
