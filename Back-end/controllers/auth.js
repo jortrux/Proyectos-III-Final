@@ -217,10 +217,10 @@ const passwordEmail = async (req, res) => {
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
         }
-        else if(!user.resgister){
+        /*else if(!user.resgister){
             handleHttpError(res, "USER_NOT_REGISTER", 404)
             return
-        }
+        }*/
 
         codigo = generador()
 
