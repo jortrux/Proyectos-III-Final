@@ -3,7 +3,7 @@ const ejs = require('ejs')
 const { tokenSign } = require("../utils/handleJwt")
 const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleError")
-const {usersModel} = require("../models")
+const {usersModel, tokenModel} = require("../models")
 const { generador } = require("../utils/handleVerificacion")
 
 
@@ -72,10 +72,10 @@ const loginCtrl = async (req, res) => {
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
         }
-        /*else if(!user.resgister){
+        else if(!user.resgister){
             handleHttpError(res, "USER_NOT_REGISTER", 404)
             return
-        }*/
+        }
         
         const hashPassword = user.password;
         const check = await compare(req.password, hashPassword)
@@ -124,6 +124,8 @@ const codeVerification = async (req, res) => {
 
         const token = await tokenSign(user)
 
+        await tokenModel.create({email: user.email, token: token})
+
         data = {
             id: user._id,
             token: token
@@ -137,4 +139,101 @@ const codeVerification = async (req, res) => {
     }
 }
 
-module.exports = { registerCtrl, loginCtrl, codeVerification }
+const newPassword = async (req, res) => {
+    try {
+        req = matchedData(req)
+        
+        const user = await usersModel.findOne({
+            email: req.email
+        })
+
+        if(!user){
+            handleHttpError(res, "USER_NOT_EXISTS", 404)
+            return
+        }
+        else if(!user.resgister){
+            handleHttpError(res, "USER_NOT_REGISTER", 404)
+            return
+        }
+
+        if(!user.passwordRecovery){
+            handleHttpError(res, "NOT_AUTORITATION", 405)
+            return
+        }
+
+        const password = await encrypt(req.newPassword)
+
+        await usersModel.updateOne({ _id: user._id }, { $set: { passwordRecovery: false, password: password } }) 
+        
+        tokenModel.deleteMany({ email: user.email })
+
+        res.status(200).send()
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_CHANGE_PASSWORD")
+    }
+}
+
+const passwordCode = async (req, res) => {
+    try {
+        req = matchedData(req)
+        
+        const user = await usersModel.findOne({
+            email: req.email
+        })
+        
+        if(!user){
+            handleHttpError(res, "ERROR_USER_NOT_EXIST", 404)
+            return
+        }
+
+        if(req.codigo !== user.recoveryCode){
+            handleHttpError(res, "WORNG_CODE", 405)
+            return
+        }
+
+        await usersModel.update({ _id: user._id }, { $set: { passwordRecovery: true } } )
+
+        res.status(200).send()
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_CODE")
+    }
+}
+
+const passwordEmail = async (req, res) => {
+    try {
+        req = matchedData(req)
+
+        const user = await usersModel.findOne({
+            email: req.email
+        })
+
+        if(!user){
+            handleHttpError(res, "USER_NOT_EXISTS", 404)
+            return
+        }
+        else if(!user.resgister){
+            handleHttpError(res, "USER_NOT_REGISTER", 404)
+            return
+        }
+
+        codigo = generador()
+
+        await usersModel.update({ _id: user._id }, { $set: { recoveryCode: true } } )
+        
+        const textoPersonalizado = ejs.render('<h1><%= codigo %> </h1>', {codigo})
+        sendEmail(user.email, 'codigo', textoPersonalizado)
+
+        res.status(200).send()
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_SEND_EMAIL")
+    }
+}
+
+
+module.exports = { registerCtrl, loginCtrl, codeVerification, newPassword, passwordCode, passwordEmail }
