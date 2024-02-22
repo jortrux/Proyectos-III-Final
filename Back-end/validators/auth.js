@@ -24,7 +24,7 @@ const validatorLogin = [
 ]
 
 const validatorCode = [
-    check("id").exists().notEmpty(),
+    check("_id").exists().notEmpty(),
     check("recoveryCode").exists().notEmpty().isNumeric(),
     (req, res, next) => {
         return validateResults(req, res, next)
