@@ -109,7 +109,7 @@ const codeVerification = async (req, res) => {
         req = matchedData(req)
 
         var user = await usersModel.findOne({
-            email: req._id
+            _id: req._id
         })
 
         if(!user){
