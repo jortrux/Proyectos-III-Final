@@ -195,7 +195,7 @@ const passwordCode = async (req, res) => {
             return
         }
 
-        await usersModel.update({ _id: user._id }, { $set: { passwordRecovery: true } } )
+        await usersModel.updateOne({ _id: user._id }, { $set: { passwordRecovery: true } } )
 
         res.status(200).send()
 
@@ -224,7 +224,7 @@ const passwordEmail = async (req, res) => {
 
         codigo = generador()
 
-        await usersModel.update({ _id: user._id }, { $set: { recoveryCode: true } } )
+        await usersModel.updateOne({ _id: user._id }, { $set: { recoveryCode: true } } )
         
         const textoPersonalizado = ejs.render('<h1><%= codigo %> </h1>', {codigo})
         sendEmail(user.email, 'codigo', textoPersonalizado)
