@@ -5,6 +5,8 @@ const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleError")
 const {usersModel, tokenModel} = require("../models")
 const { generador } = require("../utils/handleVerificacion")
+const { sendEmail } = require("../utils/handleEmail")
+
 
 
 const registerCtrl = async (req, res) => {
