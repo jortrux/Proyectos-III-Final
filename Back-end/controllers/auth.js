@@ -167,7 +167,7 @@ const newPassword = async (req, res) => {
 
         await usersModel.updateOne({ _id: user._id }, { $set: { passwordRecovery: false, password: password } }) 
         
-        tokenModel.deleteMany({ email: user.email })
+        await tokenModel.deleteMany({ email: user.email })
 
         res.status(200).send()
 
