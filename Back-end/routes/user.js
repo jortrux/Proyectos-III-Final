@@ -1,7 +1,7 @@
 const express = require("express")
 const {authMiddleware} = require("../middleware/session")
 const {getInfo, changeInfo, changePassword} = require("../controllers/user")
-const {validatorChange, validatorPassword} = require(../validators/user)
+const {validatorChange, validatorPassword} = require("../validators/user")
 const router = express.Router()
 
 router.get("/info", authMiddleware, getInfo)
