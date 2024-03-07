@@ -14,8 +14,8 @@ const getCommunities = async (req, res) => {
 const getUserCommunities = async (req, res) => {
     try {
         const userId = req.user._id; 
-        const communities = await Communities.find({ members: userId });
-        res.send({ communities });
+        const communities = await Communities.find({user.communities}).select("name description avatar");
+        res.send(communities);
     } catch (err) {
         handleHttpError(res, 'ERROR_GET_ITEMS');
     }
