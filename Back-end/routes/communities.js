@@ -10,16 +10,16 @@ Salir de una comunidad
 */
 
 
-router.get("/communities", authMiddleware, getCommunities)
+router.get("/getItems", authMiddleware, getCommunities)
 
-router.get("/communities/:id", authMiddleware, validatorGetComunity, getCommunity)
+router.get("/getItem/:id", authMiddleware, validatorGetComunity, getCommunity)
 
-router.get("/communities/user", authMiddleware, getUserCommunities)
+router.get("/user", authMiddleware, getUserCommunities)
 
-router.post("/communities", authMiddleware, validatorCreateComunity, createCommunity)
+router.post("/createItem", authMiddleware, validatorCreateComunity, createCommunity)
 
-router.delete("/communities/:id", authMiddleware, validatorGetComunity, deleteCommunity);
+router.delete("/deleteItem/:id", authMiddleware, validatorGetComunity, deleteCommunity);
 
-router.put("/communities/:id", authMiddleware, validatorGetComunity, validatorCreateComunity, updateCommunity)
+router.put("/updateItem/:id", authMiddleware, validatorGetComunity, validatorCreateComunity, updateCommunity)
 
 module.exports = router
