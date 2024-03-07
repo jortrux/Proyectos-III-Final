@@ -4,7 +4,7 @@ const generador = () => {
         var codigo = 0
         var contador = 1
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             
             var numero = Math.floor(Math.random() * 10)
             if(numero === 0 && contador === 10000){
