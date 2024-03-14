@@ -1,6 +1,6 @@
 const express = require("express")
 const {authMiddleware} = require("../middleware/session")
-const {getCommunities, getUserCommunities, getCommunity, createCommunity, deleteCommunity, updateCommunity} = require("../controllers/user")
+const {getCommunities, getUserCommunities, getCommunity, createCommunity, deleteCommunity, updateCommunity, joinCommunity, leaveCommunity} = require("../controllers/communities.js")
 const {validatorCreateComunity, validatorId } = require("../validators/communities")
 const router = express.Router()
 
@@ -21,5 +21,9 @@ router.post("/createItem", authMiddleware, validatorCreateComunity, createCommun
 router.delete("/deleteItem/:id", authMiddleware, validatorId , deleteCommunity);
 
 router.put("/updateItem/:id", authMiddleware, validatorId , validatorCreateComunity, updateCommunity)
+
+router.put("/joinCommunity", authMiddleware, validatorId, joinCommunity)
+
+router.put("/leaveCommunity", authMiddleware, validatorId, leaveCommunity)
 
 module.exports = router
