@@ -21,6 +21,6 @@ router.put("/joinCommunity", authMiddleware, validatorId, joinCommunity)
 
 router.put("/leaveCommunity", authMiddleware, validatorId, leaveCommunity)
 
-router.get("/search/:search/:professor/:student/:community/:activity/:forum", /*authMiddleware,*/ validatorSearch, searcher)
+router.get("/search/:search/:professor/:student/:community/:activity/:forum", authMiddleware, validatorSearch, searcher)
 
 module.exports = router
