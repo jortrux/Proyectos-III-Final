@@ -1,15 +1,14 @@
 .navbar {
-    background: #101010;
+    background: blue;
     display: flex;
     justify-content: space-between;
-    padding: 0 4rem;
     align-items: center;
-    color: aliceblue;
 }
 
 .navbar ul {
    display: flex;
    gap: 1rem;
+   margin: 0rem;
 }
 
 .navbar ul li {
