@@ -47,4 +47,21 @@ const changePassword = async (req, res) => {
     }
 }
 
-module.exports = { getInfo }
+const updatePhoto = async (req, res) => {
+    try {
+        const { body, file } = req
+        const user = req.user
+        const avatar = { 
+            filename: file.filename,
+            url: process.env.PUBLIC_URL+"/"+file.filename
+        }
+
+        await usersModel.updateOne({ _id: user._id }, {$set: {avatar: avatar }})
+
+        res.status(200).send()
+    }catch(err) {
+        handleHttpError(res, "ERROR_DETAIL_ITEM")
+    }
+}
+
+module.exports = { getInfo, changeInfo, changePassword, updatePhoto }

@@ -4,7 +4,7 @@ const { handleHttpError } = require("../utils/handleError")
 const checkRol = (roles) => (req, res, next) => { //Doble argumento
     try{
         const {user} = req
-        const userRol = user.rol
+        const userRol = user.role
         //Comprobamos que el rol del usuario esté en roles
         const checkValueRol = roles.includes(userRol)
         if (!checkValueRol) {

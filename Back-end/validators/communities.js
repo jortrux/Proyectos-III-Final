@@ -22,4 +22,17 @@ const validatorId = [
         return validateResults(req, res, next)
     }
 ]
-module.exports = { validatorCreateComunity, validatorId }    
+
+const validatorSearch = [
+    check("search").exists().notEmpty(),
+    check("professor").exists().notEmpty().isBoolean(),
+    check("student").exists().notEmpty().isBoolean(),
+    check("community").exists().notEmpty().isBoolean(),
+    check("activity").exists().notEmpty().isBoolean(),
+    check("forum").exists().notEmpty().isBoolean(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorCreateComunity, validatorId, validatorSearch }    

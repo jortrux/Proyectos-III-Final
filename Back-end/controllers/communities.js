@@ -1,5 +1,5 @@
 const { matchedData } = require("express-validator")
-const {communityModel, usersModel} = require("../models")
+const {communityModel, usersModel, activityModel, forumModel} = require("../models")
 const { handleHttpError } = require("../utils/handleError")
 
 
@@ -79,13 +79,14 @@ const joinCommunity = async (req, res) => {
     }
 }
 
-const leaveCommunity = async (req, reas) => {
+const leaveCommunity = async (req, res) => {
     try {
-        const {userId, communityId} = req.body
+        const user = req.user
+        const {id} = matchedData(req)
 
-        const updatedCommunity = await Communities.findByIdAndUpdate(communityId, { $pull: {members: userId}}, {new: true});
+        await Communities.findByIdAndUpdate(id, { $pull: {members: user._id}}, {new: true});
 
-        const updatedUser = await usersModel.findByIdAndUpdate(userId, { $pull: {communities: {communityId}}}, {new: true});
+        await usersModel.findByIdAndUpdate(user._id, { $pull: {communities: {id}}}, {new: true});
 
         res.status(200).send()
     }catch (err){
@@ -93,4 +94,83 @@ const leaveCommunity = async (req, reas) => {
     }
 }
 
-module.exports = { getCommunities, getUserCommunities, getCommunity, createCommunity, updateCommunity, deleteCommunity, joinCommunity, leaveCommunity };
+const searcher = async (req, res) => {
+    try {
+        req = matchedData(req)
+        var students = []
+        var professor = []
+        var communities = []
+        var activity = []
+        var forum = []
+
+        if(!(req.students && req.professor && req.communities && req.activity && req.forum)){
+            req.student = true
+            req.professor = true
+            req.community = true
+            req.activity = true
+            req.forum = true
+        }
+        
+        if(req.student){
+            students = await usersModel.find({
+                role: "alumno",
+                $or: [
+                    { name: { $regex: new RegExp(req.search, 'i') } },
+                    { firstSurname: { $regex: new RegExp(req.search, 'i') } },
+                    { secondSurname: { $regex: new RegExp(req.search, 'i') } },
+                ]
+            })
+        }
+        if(req.professor){
+            professor = await usersModel.find({
+                role: "profesor",
+                $or: [
+                    { name: { $regex: new RegExp(req.search, 'i') } },
+                    { firstSurname: { $regex: new RegExp(req.search, 'i') } },
+                    { secondSurname: { $regex: new RegExp(req.search, 'i') } },
+                ]
+            })
+        }
+        if(req.communities){
+            communities = await communityModel.find({
+                $or: [
+                    { name: { $regex: new RegExp(req.search, 'i') } },
+                    { description: { $regex: new RegExp(req.search, 'i') } },
+                    { topics: { $elemMatch: { $regex: new RegExp(req.search, 'i') } } },
+                ]
+            })
+        }
+        if(req.activity){
+            activity = await activityModel.find({
+                $or: [
+                    { title: { $regex: new RegExp(req.search, 'i') } },
+                    { description: { $regex: new RegExp(req.search, 'i') } },
+                    { type: { $regex: new RegExp(req.search, 'i') } },
+                ]
+            })
+        }
+        if(req.forum){
+            forum = await forumModel.find({
+                $or: [
+                    { title: { $regex: new RegExp(req.search, 'i') } },
+                    { description: { $regex: new RegExp(req.search, 'i') } },
+                ]
+            })
+        }
+        const data = {
+            students: students,
+            professor: professor,
+            communities: communities,
+            activity: activity,
+            forum: forum
+        }
+        
+        res.send(data)
+
+    }catch (err){
+        handleHttpError(res, 'ERROR_SEARCHER')
+    }
+}
+
+module.exports = { getCommunities, getUserCommunities, getCommunity, createCommunity, updateCommunity, deleteCommunity, 
+    joinCommunity, leaveCommunity, searcher };

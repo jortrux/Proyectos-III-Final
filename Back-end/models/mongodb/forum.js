@@ -44,7 +44,10 @@ const ForumSchema = new mongoose.Schema(
             ref: 'Activity', 
             default: null
         },
-        posts: [postSchema]
+        /*posts: [{
+            type: postSchema,
+            default: []
+        }]*/
     },
     {
         timestamps: true

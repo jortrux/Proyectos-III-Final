@@ -44,7 +44,7 @@ const ActivitySchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        posts: [postSchema], 
+        /*posts: [postSchema], */
     },
     {
         timestamps: true

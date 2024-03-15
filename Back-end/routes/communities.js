@@ -1,14 +1,9 @@
 const express = require("express")
-const {authMiddleware} = require("../middleware/session")
-const {getCommunities, getUserCommunities, getCommunity, createCommunity, deleteCommunity, updateCommunity, joinCommunity, leaveCommunity} = require("../controllers/communities.js")
-const {validatorCreateComunity, validatorId } = require("../validators/communities")
+const authMiddleware = require("../middleware/session")
+const {getCommunities, getUserCommunities, getCommunity, createCommunity, deleteCommunity, updateCommunity, 
+    joinCommunity, leaveCommunity, searcher} = require("../controllers/communities.js")
+const {validatorCreateComunity, validatorId, validatorSearch } = require("../validators/communities")
 const router = express.Router()
-
-/* TODO
-Unirte a comunidad 
-Salir de una comunidad
-*/
-
 
 router.get("/getItems", authMiddleware, getCommunities)
 
@@ -25,5 +20,7 @@ router.put("/updateItem/:id", authMiddleware, validatorId , validatorCreateComun
 router.put("/joinCommunity", authMiddleware, validatorId, joinCommunity)
 
 router.put("/leaveCommunity", authMiddleware, validatorId, leaveCommunity)
+
+router.get("/search/:search/:professor/:student/:community/:activity/:forum", /*authMiddleware,*/ validatorSearch, searcher)
 
 module.exports = router

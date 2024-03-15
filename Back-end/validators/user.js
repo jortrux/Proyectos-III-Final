@@ -21,4 +21,4 @@ const validatorPassword = [
     }
 ]
 
-module.exports = {validatorChange}
+module.exports = { validatorChange, validatorPassword }
