@@ -5,10 +5,7 @@ const tokenSign = async (user) => {
         {
             email: user.email
         },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: "2h"
-        }
+        process.env.JWT_SECRET
     )
     return sign
 }

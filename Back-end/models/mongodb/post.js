@@ -12,7 +12,6 @@ const mongoose = require('mongoose');
  */
 
 const postSchema = new mongoose.Schema({
-    title: String,
     content: String,
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +25,25 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
         default: null
-    }
+    },
+    delete: {
+        type: Boolean,
+        default: false
+    },
+    reports: [{
+        type: Object,
+        schema:{
+            complainant: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            reason: String,
+            comment: {
+                type: String,
+                default: null
+            }
+        }
+    }]
 }, { _id: true });
 
 module.exports = mongoose.model("Post", postSchema);

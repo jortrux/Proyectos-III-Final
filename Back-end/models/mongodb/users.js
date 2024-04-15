@@ -121,24 +121,15 @@ const UserSchema = new mongoose.Schema({
     },
 
     favForums: [{
-        forumId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Forum'
-        }
+        type: mongoose.Schema.Types.ObjectId
     }],
 
     enrolledActivities: [{
-        activityId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Activity'
-        }
+        type: mongoose.Schema.Types.ObjectId
     }],
 
     communities: [{
-        communityId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Communities'
-        }
+        type: mongoose.Schema.Types.ObjectId
     }],
 
     posts: [{
@@ -150,6 +141,16 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required: true
         }
+    }],
+    notifications: [{
+        id: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        type: {
+            type: String,
+            enum: ['']
+        },
+        default: []
     }]
 
 }, {

@@ -126,8 +126,8 @@ const codeVerification = async (req, res) => {
 
         const token = await tokenSign(user)
 
-        await tokenModel.create({email: user.email, token: token})
-
+        const prueba = await tokenModel.create({email: user.email, token: token})
+        console.log(prueba)
         data = {
             id: user._id,
             token: token
@@ -153,10 +153,10 @@ const newPassword = async (req, res) => {
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
         }
-        else if(!user.resgister){
+        /*else if(!user.resgister){
             handleHttpError(res, "USER_NOT_REGISTER", 404)
             return
-        }
+        }*/
 
         if(!user.passwordRecovery){
             handleHttpError(res, "NOT_AUTORITATION", 405)
@@ -189,8 +189,9 @@ const passwordCode = async (req, res) => {
             handleHttpError(res, "ERROR_USER_NOT_EXIST", 404)
             return
         }
-
-        if(req.codigo !== user.recoveryCode){
+        console.log(user.recoveryCode)
+        console.log(req.recoveryCode)
+        if(req.recoveryCode !== user.recoveryCode){
             handleHttpError(res, "WORNG_CODE", 405)
             return
         }
@@ -212,7 +213,7 @@ const passwordEmail = async (req, res) => {
         const user = await usersModel.findOne({
             email: req.email
         })
-
+        
         if(!user){
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
@@ -224,7 +225,7 @@ const passwordEmail = async (req, res) => {
 
         codigo = generador()
 
-        await usersModel.updateOne({ _id: user._id }, { $set: { recoveryCode: true } } )
+        await usersModel.updateOne({ _id: user._id }, { $set: { passwordRecovery: true , recoveryCode: codigo} } )
         
         const textoPersonalizado = ejs.render('<h1><%= codigo %> </h1>', {codigo})
         sendEmail(user.email, 'codigo', textoPersonalizado)

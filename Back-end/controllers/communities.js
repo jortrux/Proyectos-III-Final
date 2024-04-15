@@ -5,7 +5,7 @@ const { handleHttpError } = require("../utils/handleError")
 
 const getCommunities = async (req, res) => {
     try{
-        const data = await communityModel.find({})
+        const data = await communityModel.find({}).select("_id name description createdAt avatar topics")
         res.send(data)
     }catch(err){
         handleHttpError(res, 'ERROR_GET_ITEMS')
@@ -14,11 +14,12 @@ const getCommunities = async (req, res) => {
 
 const getUserCommunities = async (req, res) => {
     try {
-        const ids = req.user.communities;
-        const communities = await communityModel.find({ids}).select("name description avatar");
+        const ids = req.user.communities
+        const communities = await communityModel.find({ _id: { $in: ids } }).select("name description avatar")
         res.send(communities);
     } catch (err) {
-        handleHttpError(res, 'ERROR_GET_ITEMS');
+        console.log(err)
+        handleHttpError(res, 'ERROR_GET_ITEM');
     }
 };
 
@@ -34,13 +35,23 @@ const getCommunity = async (req, res) => {
 }
 
 
-const createCommunity = async (req, res) => {
+const createCommunity = async (req, res) => { 
     try {
-        const body = matchedData(req)
-        const data = await communityModel.create(body);
+        const user = req.user
+        req = matchedData(req)
+        req.createdBy = user._id
+        req.createdAt = Date.now()
+        req.members = [user._id]
+        const data = await communityModel.create(req)
+        const updatedUser = await usersModel.findByIdAndUpdate(
+            user._id,
+            { $push: { communities: data._id  } },
+            { new: true }
+        )
         res.send(data)    
     }catch(err){
-        handleHttpError(res, 'ERROR_CREATE_ITEMS')
+        console.log(err)
+        handleHttpError(res, 'ERROR_CREATE_ITEM')
     }
 }
 
@@ -48,7 +59,7 @@ const createCommunity = async (req, res) => {
 const updateCommunity = async (req, res) => {
     try {
         const {id, ...body} = matchedData(req)
-        const data = await communityModel.findByIdAndUpdate(id, body);
+        const data = await communityModel.findByIdAndUpdate(id, body, {new: true});
         res.send(data)    
     }catch(err){
         handleHttpError(res, 'ERROR_UPDATE_ITEMS')
@@ -57,24 +68,27 @@ const updateCommunity = async (req, res) => {
 
 const deleteCommunity = async (req, res) => {
     try {
-        const {id} = matchedData(req)
-        const data = await communityModel.delete({_id:id});
+        req = matchedData(req)
+        const data = await communityModel.deleteOne({_id: req.id})
         res.send(data)    
     }catch(err){
+        console.log(err)
         handleHttpError(res, 'ERROR_DELETE_ITEM')
     }
 }
 
 const joinCommunity = async (req, res) => {
     try {
-        const {userId, communityId} = req.body
+        const user = req.user
+        req = matchedData(req)
 
-        const updatedCommunity = await communityModel.findByIdAndUpdate(communityId, { $addToSet: {members: userId}}, {new: true});
+        const updatedCommunity = await communityModel.findByIdAndUpdate(req.id, { $addToSet: {members: user._id}}, {new: true});
 
-        const updatedUser = await usersModel.findByIdAndUpdate(userId, { $addToSet: {communities: {communityId}}}, {new: true});
+        const updatedUser = await usersModel.findByIdAndUpdate(user._id, { $addToSet: {communities: req.id}}, {new: true});
 
         res.status(200).send()
     }catch (err){
+        console.log(err)
         handleHttpError(res, 'ERROR_JOIN_COMMUNITY')
     }
 }
@@ -84,13 +98,14 @@ const leaveCommunity = async (req, res) => {
         const user = req.user
         const {id} = matchedData(req)
 
-        await Communities.findByIdAndUpdate(id, { $pull: {members: user._id}}, {new: true});
+        await communityModel.findByIdAndUpdate(id, { $pull: {members: user._id}}, {new: true})
 
-        await usersModel.findByIdAndUpdate(user._id, { $pull: {communities: {id}}}, {new: true});
+        await usersModel.findByIdAndUpdate(user._id, { $pull: {communities: id}}, {new: true})
 
         res.status(200).send()
     }catch (err){
-        handleHttpError(res, 'ERROR_leave_COMMUNITY')
+        console.log(err)
+        handleHttpError(res, 'ERROR_LEAVE_COMMUNITY')
     }
 }
 
@@ -113,7 +128,7 @@ const searcher = async (req, res) => {
         
         if(req.student){
             students = await usersModel.find({
-                role: "alumno",
+                /*role: "alumno",*/
                 $or: [
                     { name: { $regex: new RegExp(req.search, 'i') } },
                     { firstSurname: { $regex: new RegExp(req.search, 'i') } },
@@ -131,7 +146,7 @@ const searcher = async (req, res) => {
                 ]
             })
         }
-        if(req.communities){
+        if(req.community){
             communities = await communityModel.find({
                 $or: [
                     { name: { $regex: new RegExp(req.search, 'i') } },
@@ -157,6 +172,7 @@ const searcher = async (req, res) => {
                 ]
             })
         }
+        
         const data = {
             students: students,
             professor: professor,

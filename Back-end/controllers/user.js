@@ -64,4 +64,14 @@ const updatePhoto = async (req, res) => {
     }
 }
 
-module.exports = { getInfo, changeInfo, changePassword, updatePhoto }
+const getNotifications = async (req, res) => {
+    try {
+        const user = req.user
+
+        res.status(200).send(user.notifications)
+    }catch(err) {
+        handleHttpError(res, "ERROR_DETAIL_ITEM")
+    }
+}
+
+module.exports = { getInfo, changeInfo, changePassword, updatePhoto, getNotifications }

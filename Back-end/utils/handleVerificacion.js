@@ -7,7 +7,7 @@ const generador = () => {
         for (let i = 0; i < 6; i++) {
             
             var numero = Math.floor(Math.random() * 10)
-            if(numero === 0 && contador === 10000){
+            if(numero === 0 && contador === 100000){
                 numero++
             }
             codigo += numero * contador

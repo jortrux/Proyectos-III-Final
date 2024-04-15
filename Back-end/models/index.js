@@ -15,5 +15,6 @@ module.exports = {
   communityModel: communities,
   activityModel: Activity,
   forumModel: Forum,
+  postModel: Post,
   // Add more models as needed
 };

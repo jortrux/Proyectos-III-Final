@@ -43,10 +43,6 @@ const CommunitiesSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }],
-        public: {
-            type: Boolean,
-            default: true
-        },
         topics: [{
             type: String
         }],
@@ -56,12 +52,6 @@ const CommunitiesSchema = new mongoose.Schema(
             },
             url: {
                 type: String
-            }
-        },
-        settings: {
-            allowPosts: {
-                type: Boolean,
-                default: true
             }
         }
     },

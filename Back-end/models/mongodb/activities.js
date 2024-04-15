@@ -37,13 +37,38 @@ const ActivitySchema = new mongoose.Schema(
         community: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Communities',
-            default: null // 
+            default: null 
         },
-        
+        mandatoryParticipants: [{
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Users'
+            },
+            confirmed: {
+                type: String,
+                default: false
+            },
+            default: []
+        }],
+        optionalParticipants: [{
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Users'
+            },
+            confirmed: {
+                type: String,
+                default: false
+            },
+            default: []
+        }], 
         type: {
             type: String,
             required: true
         },
+        active: {
+            type: Boolean,
+            default: true
+        }
         /*posts: [postSchema], */
     },
     {
