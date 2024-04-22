@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
-import { UserContext, createCurrentUser } from '../user-context'
+//import { UserContext, createCurrentUser } from '../user-context'
 import Image from 'next/image'
 import CurrentProfile from '@/components/CurrentProfile'
 

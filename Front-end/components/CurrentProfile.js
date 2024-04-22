@@ -1,9 +1,10 @@
 'use client'
 
 import { useContext, useState } from 'react';
-import { UserContext } from '@/app/user-context';
+//import { UserContext } from '@/app/user-context';
 import Image from 'next/image'
 import Tag from './Tag';
+import ProfileTemp from '../resources/images/ProfileTemp.png';
 
 export default function CurrentProfile() {
     const [name, setName] = useState("")
@@ -14,7 +15,7 @@ export default function CurrentProfile() {
     return (
         <div>
             <div>
-                <Image src="/imgDefault/defaultPfP.png" width={160} height={100} className="rounded mt-3" alt="profile picture"/>
+                <Image src={ProfileTemp} className="rounded mt-3" alt="profile picture"/>
                 <h2>Bienvenido {name ? name : "Usuario"}</h2>
             </div>
             <div className='d-inline-flex'>
