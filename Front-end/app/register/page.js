@@ -4,16 +4,16 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 function Registrar(){
-	
-	//definir todas las variables necesarias
-	const router = useRouter()
+    
+    //definir todas las variables necesarias
+    const router = useRouter()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordrep, setPasswordrep] = useState("")
     const [name, setName] = useState("")
     const [apellido1, setApellido1] = useState("")
     const [apellido2, setApellido2] = useState("")
-	const [genero, setGenero] = useState("")
+    const [genero, setGenero] = useState("")
     const [grado, setGrado] = useState("")
     const [año, setAño] = useState(0)
     const [valido, setValido] = useState("")

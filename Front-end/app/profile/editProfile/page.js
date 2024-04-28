@@ -2,9 +2,10 @@
 
 import { useRouter } from 'next/navigation'
 import { useContext, useState, useEffect } from 'react'
-import { UserContext, createCurrentUser } from '../../user-context'
+//import { UserContext, createCurrentUser } from '../../user-context'
 import Image from 'next/image'
 import Tag from '@/components/Tag'
+import ProfileTemp from '../../../resources/images/profileTemp.png';
 
 
 function EditarPerfil(){
@@ -17,7 +18,6 @@ function EditarPerfil(){
     const [name, setName] = useState("")
     const [bio, setBio] = useState("")
     const [apellido1, setApellido1] = useState("")
-    const [apellido2, setApellido2] = useState("")
 	const [genero, setGenero] = useState("")
     const [grado, setGrado] = useState("")
     const [año, setAño] = useState(0)
@@ -52,8 +52,7 @@ function EditarPerfil(){
                 email: email,
                 password: password,
                 name: name,
-                firstSurname: apellido1,
-                secondSurname: apellido2,
+                surname: setApellido1,
                 gender: genero,
                 degree: grado,
                 course: año
@@ -78,32 +77,111 @@ function EditarPerfil(){
             //router.push(`/registered-users/${user.id}`)
     }
 
-    return(
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.substr(0, 5) === 'image') {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setImageSrc('../../../resources/images/profileTemp.png');
+        }
+    };
+
+    function ToggleSwitch({ enabled, setEnabled }) {
+        return (
+            <div className="flex items-center justify-start w-full py-2">
+            <label htmlFor="toggle" className="inline-flex items-center cursor-pointer">
+              <div className="relative">
+                <input
+                  id="toggle"
+                  type="checkbox"
+                  className="sr-only"
+                  checked={enabled}
+                  onChange={() => setEnabled(!enabled)}
+                />
+                {/* Este es el fondo del toggle switch */}
+                <div className="block bg-gray-200 w-10 h-6 rounded-full"></div>
+                {/* Este es el círculo del toggle switch que se mueve */}
+                <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ${
+                  enabled ? 'transform translate-x-4' : ''
+                }`}></div>
+              </div>
+              {/* Este es el texto al lado del toggle switch */}
+              <span className="ml-3 text-gray-700 text-sm">
+                Mostrar en tu perfil público las actividades a las que has asistido
+              </span>
+            </label>
+          </div>
+        );
+      }
+
+
+    return (
         <div className='text-center'>
-            <div>
-                <Image src={image ? image : "/imgDefault/defaultPfP.png"} width={160} height={100} className="rounded mt-3" alt="profile picture"/>
+            <div className="flex justify-center items-center h-screen">
+                <div className='mb-4'>
+                <h2>Editar perfil</h2>
+                    <Image 
+                        src= {ProfileTemp} 
+                        width={160} 
+                        height={160} 
+                        className="rounded-full" 
+                        alt="profile picture"
+                    />
+                    </div>
+                    <div>
+                    <input 
+                        type="file" 
+                        name="profileImage" 
+                        accept="image/*" 
+                        className="mt-2" 
+                        onChange={handleImageChange}
+                    />
+                </div>
+               
+                    <input 
+                        type='text' 
+                        placeholder='Nombre' 
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="p-2 border rounded"
+                    />
+                    <input 
+                        type='text' 
+                        placeholder='Apellido/s' 
+                        value={apellido1}
+                        onChange={(e) => setApellido1(e.target.value)}
+                        className="p-2 border rounded"
+                    />
+                    </div>
+                    <div>
+                    <h2>Biografia</h2>
+                    <textarea 
+                        placeholder='Biografía' 
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        className='p-2 border rounded' 
+                        rows="5"
+                        cols="50" 
+                    />
+                        <div className="p-6">
+                            <ToggleSwitch enabled={valido} setEnabled={setValido} />
+                        </div>  
+                    </div>
+                    <div>
+                    <button 
+                        type="submit" 
+                        className="bg-blue-500 text-white p-2 rounded"
+                    >
+                        Guardar
+                    </button>
+                
             </div>
-            <form className="upload">
-                <input type="file" name="uploadFile" accept=".png" required /*onChange={(e) => setImage(e.target.value)}*//>
-            </form>
-            <div className='my-3'>
-                <input type='text' placeholder='nombre' onChange={(e) => setName(e.target.value)}></input>
-            </div>
-            <div className='d-inline-flex'>
-                {tagList.map((tag) => (
-                    <Tag id={tag} tag={tag}/>
-                ))}
-                <Tag id={tag}/>
-            </div>
-            <div className='my-3'>
-                <input type='text' placeholder='Nueva etiqueta' onChange={(e) => setTag(e.target.value)}></input>
-            </div>
-            <div>
-                <textarea placeholder='Biografia' className='border mx-5 border-primary rounded' size="60" cols="40" rows="5" onChange={(e) => setBio(e.target.value)}/>
-            </div>
-            <button className="text-center mt-3" onClick={handleEdit}>Guardar</button>
-        </div>  
-    )
+        </div>
+    );
 }
 
 export default EditarPerfil;

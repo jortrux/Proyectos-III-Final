@@ -12,18 +12,25 @@ export default function CurrentProfile() {
     const [bio, setBio] = useState("")
     const [tag, setTag] = useState("")
 
-    return (
+    return (   
         <div>
             <div>
+                <h2>Tu perfil {name ? name : "Usuario"}</h2>
                 <Image src={ProfileTemp} className="rounded mt-3" alt="profile picture"/>
-                <h2>Bienvenido {name ? name : "Usuario"}</h2>
             </div>
+            <h5>CORREO ELECTRÓNICO</h5>
+            <div className='d-inline-flex'>
+            <h5>{email}</h5>
+            </div>
+            <h5>ROLES</h5>
             <div className='d-inline-flex'>
                 <Tag id={tag}/>
             </div>
+            <h5>BIOGRAFIA</h5>
             <div>
-                <textarea placeholder='Biografia' value = {bio ? bio : ""} className='border border-primary rounded' size="60" cols="40" rows="5"/>
+                <h5>{bio}</h5>
             </div>
+            <h5>ACTIVIDADES QUE AS GUARDADO</h5>
         </div>
         
     )
