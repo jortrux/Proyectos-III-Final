@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "../components/NavbarDARIO";
+import Navbar from "../components/Navbar";
 import ProjectsSection from "../components/ProjectsSection";
 import Link from "next/link";
 
