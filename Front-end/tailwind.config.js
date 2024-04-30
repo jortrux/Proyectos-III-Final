@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const { Montserrat } = require('next/font/google');
 const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
@@ -21,6 +22,9 @@ module.exports = {
       auxiliary: colors.green,
       background: colors.yellow,
     },
+    fontFamily: {
+      Montserrat: ['Montserrat', 'sans-serif'],
+    }
   },
   plugins: [],
 };
