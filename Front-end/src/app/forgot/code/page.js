@@ -59,42 +59,48 @@ export default function Code() {
   };
 
   return (
-    <main>
-      <div className="flex space-x-4 mx-3 mt-2">
-        <Image src={backArrow} width={32} height={32} alt="Esto no furula" className="box-content h-8 w-8 self-center"></Image>
-        <h1 className="font-extrabold font-Montserrat text-3xl">Recuperación de contraseña</h1>
-      </div>
-      <div className="flex mx-3 gap-3 mt-2">
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
-        <div className="w-full bg-blue-600 h-2.5 rounded-full dark:bg-blue-500"></div>
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
-      </div>
-      <div>
-        <p className="mx-3 font-extralight font-Montserrat">Introduce el código enviado al correo elisa.rodriguez@live.u-tad.com para recuperar la contraseña</p>
-      </div>
-      <div className="my-12">
-        <div className="flex justify-center">
-          <div className="flex space-x-2">
-            {codes.map((code, index) => (
-              <input
-                key={index}
-                ref={ref => (inputRefs.current[index] = ref)}
-                type="text"
-                maxLength="1"
-                value={code}
-                onChange={e => handleChange(index, e)}
-                onKeyDown={e => handleKeyDown(index, e)}
-                className="w-12 h-12 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 rounded focus:outline-none"
-              />
-            ))}
+    <main className="md:bg-gray-200 md:w-screen md:h-screen md:flex md:justify-center">
+      <div className="bg-white md:rounded-xl md:h-auto flex-col self-center justify-center items-center gap-8 flex">
+        <div className="md:m-20 flex-col flex">
+          <div className="flex space-x-4 mx-2 md:mx-0">
+            <Image src={backArrow} width={32} height={32} alt="Esto no furula" className="box-content h-8 w-8 self-center md:hidden"></Image>
+            <h1 className="font-extrabold font-Montserrat text-3xl md:text-5xl">Recuperación de contraseña</h1>
+          </div>
+          <div className="flex gap-3 mt-2 md:justify-center mx-3 md:mx-0">
+            <div className="w-full md:w-72 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
+            <div className="w-full md:w-72 bg-blue-600 h-2.5 rounded-full dark:bg-blue-500"></div>
+            <div className="w-full md:w-72 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
+          </div>
+          <div >
+            <p className="font-Montserrat md:mt-4 mx-3 md:mx-0 text-sm">Introduce el código enviado al correo elisa.rodriguez@live.u-tad.com para recuperar la contraseña.</p>
+          </div>
+          <div className="my-12">
+            <div className="flex justify-center">
+              <div className="flex space-x-2">
+                {codes.map((code, index) => (
+                  <input
+                    key={index}
+                    ref={ref => (inputRefs.current[index] = ref)}
+                    type="text"
+                    maxLength="1"
+                    value={code}
+                    onChange={e => handleChange(index, e)}
+                    onKeyDown={e => handleKeyDown(index, e)}
+                    className="w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 md:border-blue-500 rounded focus:outline-none"
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="flex justify-center mt-2">
+                <p className="text-blue-600 underline font-Montserrat">Volver a enviar un código</p>
+            </div>
+          </div>
+          <div className="grid justify-items-center grid-cols-1 md:grid-cols-2">
+            <button className="hidden md:block border-opacity-100 border-2 border-blue-500 bg-white text-blue-600 text-xl font-bold font-Montserrat py-3 px-4 rounded-xl md:justify-self-start md:ml-44">VOLVER</button>
+            <button className="bg-blue-600 text-white text-xl font-bold font-Montserrat py-3 px-4 rounded-xl md:justify-self-end md:mr-44">CONTINUAR</button>
           </div>
         </div>
-        <div className="flex justify-center mt-2">
-            <p className="text-blue-500 underline font-Montserrat">Volver a enviar un código</p>
-        </div>
-      </div>
-      <div className="grid justify-items-center">
-        <button className=" bg-blue-600 text-white text-xl font-bold font-Montserrat py-3 px-4 rounded-lg">Continuar</button>
+        
       </div>
     </main>
   );
