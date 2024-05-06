@@ -6,7 +6,7 @@ import passSuccess from "../../../resources/images/passSuccess.png"
 
 export default function Success() {
   return (
-    <main>
+    <main className="md:bg-gray-200 md:w-screen md:h-screen md:flex md:justify-center">
         <div className="bg-white md:rounded-xl md:h-auto flex-col self-center justify-center items-center gap-8 flex">
             <div className="md:m-20 flex-col flex">
                 <div className="flex space-x-4 mx-3 mt-2">
