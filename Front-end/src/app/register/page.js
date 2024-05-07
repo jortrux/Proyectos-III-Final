@@ -1,185 +1,78 @@
 'use client'
 
+import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import backArrow from "../../resources/images/backArrow.png"
 
 function Registrar(){
-    
-    //definir todas las variables necesarias
-    const router = useRouter()
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [passwordrep, setPasswordrep] = useState("")
-    const [name, setName] = useState("")
-    const [apellido1, setApellido1] = useState("")
-    const [apellido2, setApellido2] = useState("")
-    const [genero, setGenero] = useState("")
-    const [grado, setGrado] = useState("")
-    const [año, setAño] = useState(0)
-    const [valido, setValido] = useState("")
-    const [rol, setRol] = useState("")
-
-    const handleTitulacion = (e) => {
-        setGrado(e.target.value)
-        
-        let selectElement = document.getElementById("grado");
-
-        let selectedOption = selectElement.options[selectElement.selectedIndex];
-
-        let optgroup = selectedOption.parentNode.label;
-
-        console.log("Optgroup Label:", optgroup);
-
-        if(optgroup == "Grados"){
-            document.getElementsByClassName("grado")[0].style.visibility = "visible";
-            document.getElementsByClassName("grado")[1].style.visibility = "visible";
-            document.getElementsByClassName("doblegrado")[0].style.visibility = "hidden";
-        }
-        else if(optgroup == "Dobles Grados"){
-            document.getElementsByClassName("grado")[0].style.visibility = "visible";
-            document.getElementsByClassName("grado")[1].style.visibility = "visible";
-            document.getElementsByClassName("doblegrado")[0].style.visibility = "visible";
-        }
-        else if(optgroup == "Ciclos"){
-            document.getElementsByClassName("grado")[0].style.visibility = "hidden";
-            document.getElementsByClassName("grado")[1].style.visibility = "hidden";
-            document.getElementsByClassName("doblegrado")[0].style.visibility = "hidden";
-        }
-    }
-
-    const handleCurso = (e) => {
-        let numCurso = parseInt(e.target.value);
-        setAño(numCurso);
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        setValido("true");
-        document.getElementById("emailTitle").style.color = "black";
-        document.getElementById("contraseñaTitle").style.color = "black";
-        document.getElementById("contraseñarepTitle").style.color = "black";
-
-        if(password.length < 8 || password.length > 64){
-            setValido("false");
-            document.getElementById("contraseñaTitle").style.color = "red";
-        }
-
-        if(!email.endsWith('@live.u-tad.com') && !email.endsWith('@u-tad.com')){
-            setValido("false");
-            document.getElementById("emailTitle").style.color = "red";
-        }
-        if(password.length < 8){
-            setValido("false");
-            document.getElementById("contraseñaTitle").style.color = "red";
-        }
-        else if(password != passwordrep){
-            setValido("false");
-            document.getElementById("contraseñarepTitle").style.color = "red";
-        }
-
-        console.log(valido);
-
-        if(valido == "true"){
-            const user = {
-                email: email,
-                password: password,
-                name: name,
-                firstSurname: apellido1,
-                secondSurname: apellido2,
-                gender: genero,
-                degree: grado,
-                course: año
-                //rol: rol
-            }
-
-            console.log(user);
-            //setRol("user")
-            fetch("http://87.221.139.203:443/api/auth/register", {
-                method: "POST",
-                headers: {
-                
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user)
-            })
-                .then((res) => res.json())
-                .then((data) => console.log(data))
-            
-            //router.push(`/registered-users/${user.id}`)
-        }
-    }
 
     return(
-        <div className="row text-center">
-            <form onSubmit={handleSubmit} className="col">
+        <main className="md:bg-gray-200 md:w-screen md:h-screen md:flex md:justify-center"> 
+            <div className="bg-white md:rounded-xl md:h-auto flex-col self-center justify-center items-center gap-8 flex">
+                <div className="md:m-20 flex-col flex">
+                    <div className="flex space-x-4 mx-3 mt-2">
+                        <Image src={backArrow} width={32} height={32} alt="Esto no furula" className="box-content h-8 w-8 self-center"></Image>
+                        <h1 className="font-extrabold font-Montserrat text-3xl">Crea tu cuenta</h1>
+                    </div>
+                    <div className="flex mx-3 gap-3 mt-2">
+                        <div className="w-full bg-blue-600 h-2.5 rounded-full dark:bg-blue-500"></div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
+                    </div>
+                    <div>
+                        <p className="mx-3 font-Montserrat">Registrarte en U-tad Activities para acceder a todo el contenido.</p>
+                    </div>
+                    <div className="my-12 flex flex-col">
+                        <div className="grid grid-cols-2 border-b-2 border-gray-400 mx-4 mt-3 mb-2">
+                            <input placeholder="Nombre" className="w-60 h-8 text-center placeholder-opacity-100 placeholder-gray-600 font-Montserrat"></input>
+                            <svg className="place-self-center justify-self-end mr-1.5" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 0C4.90909 0 1.41545 2.488 0 6C1.41545 9.512 4.90909 12 9 12C13.0909 12 16.5845 9.512 18 6C16.5845 2.488 13.0909 0 9 0ZM9 10C6.74182 10 4.90909 8.208 4.90909 6C4.90909 3.792 6.74182 2 9 2C11.2582 2 13.0909 3.792 13.0909 6C13.0909 8.208 11.2582 10 9 10ZM9 3.6C7.64182 3.6 6.54545 4.672 6.54545 6C6.54545 7.328 7.64182 8.4 9 8.4C10.3582 8.4 11.4545 7.328 11.4545 6C11.4545 4.672 10.3582 3.6 9 3.6Z" fill="#9DA3A7"/>
+                            </svg>
+                        </div>
 
-                <h3 id="nombreTitle">Nombre</h3>
-                <input onChange={(e) => setName(e.target.value)} type="text" name="name" placeholder="nombre"/>
-                
-                <h3 id="apellido1Title">Primer apellido</h3>
-                <input onChange={(e) => setApellido1(e.target.value)} type="text" name="name" placeholder="primer apellido"/>
+                        <div className="grid grid-cols-2 border-b-2 border-gray-400 mx-4">
+                            <input placeholder="Apellido/s" className="w-64 h-8 text-center placeholder-opacity-100 placeholder-gray-600 font-Montserrat"></input>
+                            <svg className="place-self-center justify-self-end mr-1.5" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 0C4.90909 0 1.41545 2.488 0 6C1.41545 9.512 4.90909 12 9 12C13.0909 12 16.5845 9.512 18 6C16.5845 2.488 13.0909 0 9 0ZM9 10C6.74182 10 4.90909 8.208 4.90909 6C4.90909 3.792 6.74182 2 9 2C11.2582 2 13.0909 3.792 13.0909 6C13.0909 8.208 11.2582 10 9 10ZM9 3.6C7.64182 3.6 6.54545 4.672 6.54545 6C6.54545 7.328 7.64182 8.4 9 8.4C10.3582 8.4 11.4545 7.328 11.4545 6C11.4545 4.672 10.3582 3.6 9 3.6Z" fill="#9DA3A7"/>
+                            </svg>
+                        </div>
 
-                <h3 id="apellido2Title">Segundo apellido</h3>
-                <input onChange={(e) => setApellido2(e.target.value)} type="text" name="name" placeholder="segundo apellido"/>
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn m-1">Click</div>
+                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a>Item 1</a></li>
+                                <li><a>Item 2</a></li>
+                            </ul>
+                        </div>
 
-                <h3 id="emailTitle">Email de U-Tad</h3>
-                <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Correo" required="" />
+                        <div className="grid grid-cols-2 border-b-2 border-gray-400 mx-4 mt-3 mb-2">
+                            <input type="password" placeholder="Contraseña (mín. 8 caracteres)" className="w-60 h-8 text-center placeholder-opacity-100 placeholder-gray-600 font-Montserrat"></input>
+                            <svg className="place-self-center justify-self-end mr-1.5" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 0C4.90909 0 1.41545 2.488 0 6C1.41545 9.512 4.90909 12 9 12C13.0909 12 16.5845 9.512 18 6C16.5845 2.488 13.0909 0 9 0ZM9 10C6.74182 10 4.90909 8.208 4.90909 6C4.90909 3.792 6.74182 2 9 2C11.2582 2 13.0909 3.792 13.0909 6C13.0909 8.208 11.2582 10 9 10ZM9 3.6C7.64182 3.6 6.54545 4.672 6.54545 6C6.54545 7.328 7.64182 8.4 9 8.4C10.3582 8.4 11.4545 7.328 11.4545 6C11.4545 4.672 10.3582 3.6 9 3.6Z" fill="#9DA3A7"/>
+                            </svg>
+                        </div>
 
-                <h3 id="contraseñaTitle">Contraseña</h3>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Contraseña" required="" />
-                <h3 id="contraseñarepTitle">Repite Contraseña</h3>
-                <input onChange={(e) => setPasswordrep(e.target.value)} type="password" name="password" placeholder="Repite contraseña" required="" />
+                        <div className="grid grid-cols-2 border-b-2 border-gray-400 mx-4">
+                            <input type="password" placeholder="Vuelve a introducir la contraseña" className="w-64 h-8 text-center placeholder-opacity-100 placeholder-gray-600 font-Montserrat"></input>
+                            <svg className="place-self-center justify-self-end mr-1.5" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 0C4.90909 0 1.41545 2.488 0 6C1.41545 9.512 4.90909 12 9 12C13.0909 12 16.5845 9.512 18 6C16.5845 2.488 13.0909 0 9 0ZM9 10C6.74182 10 4.90909 8.208 4.90909 6C4.90909 3.792 6.74182 2 9 2C11.2582 2 13.0909 3.792 13.0909 6C13.0909 8.208 11.2582 10 9 10ZM9 3.6C7.64182 3.6 6.54545 4.672 6.54545 6C6.54545 7.328 7.64182 8.4 9 8.4C10.3582 8.4 11.4545 7.328 11.4545 6C11.4545 4.672 10.3582 3.6 9 3.6Z" fill="#9DA3A7"/>
+                            </svg>
+                        </div>
 
-                <h3 id="generoTitle">Genero</h3>
-                <select name="genero" id="genero" onChange={(e) => setGenero(e.target.value)}>
-                    <option value="male">Hombre</option>
-                    <option value="female">Mujer</option>
-                    <option value="other">No binario</option>
-                    <option value="prefer not to say">Prefiero no decirlo</option>
-                </select>
-
-                <h3 id="gradoTitle">Grado</h3>
-                <select name="grado" id="grado" onChange={(e) => handleTitulacion(e)}>
-                    <optgroup label="Grados">
-                        <option value="aniv">Animacion</option>
-                        <option value="didi">Diseño Digital</option>
-                        <option value="inso">Ingenieria de Software</option>
-                        <option value="ade">Direcccion de Empresas de Entretenimiento Digital</option>
-                        <option value="efectos">Efectos Visuales</option>
-                        <option value="dipi">Diseño de Productos Interactivos</option>
-                    </optgroup>
-                    <optgroup label="Dobles Grados">
-                        <option value="mais">Doble Grado en Matematica Computacional Ingenieria de Software</option>
-                        <option value="fiis">Doble Grado en Fisica Computacional Ingenieria de Software</option>
-                    </optgroup>
-                    <optgroup label="Ciclos">
-                        <option value="marketing">Marketing y Publicidad</option>
-                        <option value="apdi">Artes Plasticas y Diseño en Ilustracion</option>
-                        <option value="multiplataforma">Desarrollo de Aplicaciones Multiplataforma</option>
-                        <option value="web">Desarrollo de Aplicaciones Web</option>
-                        <option value="sis">Administracion de Sistemas Informaticos en Red</option>
-                        <option value="dual">Desarrollo de Aplicaciones Multiplataforma Dual</option>
-                        <option value="entornos">Animaciones 3D, Juegos y Entornos Interactivos</option>
-                    </optgroup>
-                </select>
-
-                <h3 id="añoTitle">Curso actual</h3>
-                <select name="año" id="añoDobleGrado" onChange={(e) => handleCurso(e)}>
-                    <option value="1">1º</option>
-                    <option value="2">2º</option>
-                    <option value="3" className="grado">3º</option>
-                    <option value="4" className="grado">4º</option>
-                    <option value="5" className="doblegrado">5º</option>
-                </select><br></br><br></br>
-                <button type="submit" id="registrar" className="col">Registrar</button>
-                
-                <input type="reset" id="borrar" value="Borrar" className="col"/>
-            
-            
-            </form>
-        </div>       
+                        <div>
+                            <svg id="condiciones" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="1.08716" width="20.5088" height="19.8257" rx="9.91284" stroke="#0065EF"/>
+                            <div className="bg-blue-600"></div>
+                            </svg>  
+                        </div>
+                    </div>
+                    <div className="grid justify-items-center">
+                        <button className="bg-blue-600 text-white text-xl font-bold font-Montserrat py-3 px-4 rounded-lg">CONTINUAR</button>
+                    </div>
+                </div>
+            </div>
+        </main> 
     )
 }
 
