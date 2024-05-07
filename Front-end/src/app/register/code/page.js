@@ -62,17 +62,17 @@ export default function Code() {
     <main className="md:bg-gray-200 md:w-screen md:h-screen md:flex md:justify-center">
       <div className="bg-white md:rounded-xl md:h-auto flex-col self-center justify-center items-center gap-8 flex">
         <div className="md:m-20 flex-col flex">
-          <div className="flex space-x-4 mx-2 md:mx-0">
+          <div className="flex space-x-4 mx-2 md:mx-0 mt-5 md:mt-0">
             <Image src={backArrow} width={32} height={32} alt="Esto no furula" className="box-content h-8 w-8 self-center md:hidden"></Image>
-            <h1 className="font-extrabold font-Montserrat text-3xl md:text-5xl">Recuperación de contraseña</h1>
+            <h1 className="font-extrabold font-Montserrat text-3xl md:text-5xl">Crea tu cuenta</h1>
           </div>
           <div className="flex gap-3 mt-2 md:justify-center mx-3 md:mx-0">
             <div className="w-full md:w-72 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
-            <div className="w-full md:w-72 bg-blue-600 h-2.5 rounded-full dark:bg-blue-500"></div>
             <div className="w-full md:w-72 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
+            <div className="w-full md:w-72 bg-blue-600 h-2.5 rounded-full dark:bg-blue-500"></div>
           </div>
           <div >
-            <p className="font-Montserrat md:mt-4 mx-3 md:mx-0 text-sm text-zinc-500">Introduce el código enviado al correo elisa.rodriguez@live.u-tad.com para recuperar la contraseña.</p>
+            <p className="font-Montserrat md:mt-4 mx-3 md:mx-0 text-sm text-zinc-500">Introduce el código enviado al correo elisa.rodriguez@live.u-tad.com para confirmar la creación de cuenta.</p>
           </div>
           <div className="my-12">
             <div className="flex justify-center">

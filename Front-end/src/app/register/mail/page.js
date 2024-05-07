@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import backArrow from "../../resources/images/backArrow.png"
+import backArrow from "../../../resources/images/backArrow.png"
 
 function Registrar(){
 
