@@ -86,7 +86,7 @@ function EditarPerfil(){
             };
             reader.readAsDataURL(file);
         } else {
-            setImageSrc('../../../resources/images/profileTemp.png');
+            setImageSrc(ProfileTemp);
         }
     };
 
@@ -141,7 +141,6 @@ function EditarPerfil(){
                         onChange={handleImageChange}
                     />
                 </div>
-               
                     <input 
                         type='text' 
                         placeholder='Nombre' 
