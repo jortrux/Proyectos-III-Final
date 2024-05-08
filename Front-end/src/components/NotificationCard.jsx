@@ -8,7 +8,7 @@ const NotificationCard = ({ imgUrl, description, id, date }) => {
     return (
         <div className="grid grid-cols-5 min-w-screen border-b-2">
             <div className="col-span-1 grid items-center justify-items-center relative group">
-                <Image src={getImg(id)} width={50} height={50} className="rounded-full"></Image>
+                <Image src={getImg(id, imgUrl)} width={50} height={50} className="rounded-full"></Image>
             </div>
             <div className="col-span-3 grid grid-rows-5">
                 <div className="row-span-1 flex">
@@ -37,7 +37,7 @@ const getLabel = (id) => {
     }
 }
 
-const getImg = (id) => {
+const getImg = (id, imgUrl) => {
     if(id == "Recordatorio"){
         return notificationIccon;
     }else if(id == "Mensaje"){
