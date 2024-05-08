@@ -10,11 +10,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  /*<Navbar /> esto iría dentro del body suponiendo que vaya en el layout global
+  */
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}</body>
+      {children}
+      </body>
     </html>
   );
 }
