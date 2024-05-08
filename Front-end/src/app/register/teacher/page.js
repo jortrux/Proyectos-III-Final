@@ -9,6 +9,36 @@ import profileTemp from "../../../resources/images/profileTemp.png"
 
 export default function Teacher() {
 
+/*<div className="bg-white rounded-lg shadow-lg p-6 max-w-sm">
+                <p className="text-sm text-gray-600 mb-4">Titulación/es en las que se imparte clase</p>
+                <div className="space-y-2">
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Grado en Animación</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Grado en Diseño Digital</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Grado en Ingeniería de Software</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Grado en Diseño de Productos Interactivos</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Grado en Efectos Visuales</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox h-4 w-4"/>
+                    <span>Doble Grado en Matemática Computacional e Ingeniería del Software</span>
+                  </label>
+                </div>
+              </div>*/
+
   return (
     <main className="md:bg-gray-200 md:w-screen md:h-screen md:flex md:justify-center">
       <div className="bg-white md:rounded-xl md:h-auto flex-col self-center justify-center items-center gap-8 flex">
@@ -35,10 +65,9 @@ export default function Teacher() {
             </div>
             <p className="text-blue-600 text-lg md:text-2xl font-semibold grid justify-center md:justify-start font-Montserrat mt-3 md:-mt-3">NOMBRE DE PROFESOR</p>
             <div className="md:col-start-2">
-              <label className="text-zinc-700 text-sm">Titulación/es en las que se imparte clase
-                <input type="checkbox"/>
-              </label>
+              <label>Titulación/es en las que se imparte clase</label>
             </div>
+            
             <label className="md:col-start-2">Biografía</label>
             <textarea className="md:col-start-2 border border-zinc-400 rounded-lg text-sm" rows="5" maxLength={200} placeholder="¿Cuáles son tus intereses?"></textarea>
           </div>
