@@ -53,7 +53,7 @@ export default function Home() {
               <div className="w-full md:w-72 bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"></div>
             </div>
             <div >
-              <p className="font-Montserrat md:mt-4 mx-3 md:mx-0 text-sm md:text-lg">Escribe un correo electrónico al que quieras que se envíe el código para recuperar la contraseña.</p>
+              <p className="font-Montserrat md:mt-4 mx-3 md:mx-0 text-sm md:text-lg">Escribe un correo electrónico al que quieras que se envíe el código para eliminar la cuenta.</p>
             </div>
             <div className="grid grid-cols-2 border-b-2 border-gray-400 mx-4 my-32">
               <input placeholder="Correo electrónico" className="w-60 h-8 text-center placeholder-opacity-100 placeholder-gray-600 font-Montserrat"></input>
