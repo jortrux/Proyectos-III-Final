@@ -133,15 +133,9 @@ const ProjectsSection = () => {
                 />        
             </div>
         </div>
-        <ul ref={ref} className="grid md:grid-cols-4 gap-8 md:gap-12">
+        <ul ref={ref} className="grid md:grid-cols-4 gap-8 md:gap-12 mt-4   ">
             {filteredProjects.map((project, index) => (
-                <motion.li
-                key={index}
-                variants={cardVariants}
-                initial="initial"
-                animate={isInView ? "animate" : "initial"}
-                transition={{ duration: 0.4, delay: 0.3 }}
-            >
+                
                 <ProjectCard
                     key={project.id}
                     title={project.title}
@@ -149,7 +143,7 @@ const ProjectsSection = () => {
                     imgUrl={project.imgUrl}
                     id={project.id}
                 />
-            </motion.li>
+        
             ))} 
         </ul>
     </>
