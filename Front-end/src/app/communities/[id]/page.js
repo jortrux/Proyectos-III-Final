@@ -1,4 +1,5 @@
 "use client"
+import ForumSection from '@/components/ForumSection';
 import React, { useEffect, useState } from 'react';
 
 
@@ -69,15 +70,17 @@ export default function Comunidad({}){
     <main className="flex min-h-screen flex-col bg-[#ffffff]">
         <div className="grid grid-cols-3 border-t-2 border-[#9DA3A7] mt-24 px-20 h-screen">
             <div className="col-span-1 border-r-2 pt-8 pr-8 border-[#9DA3A7]">
-                <h1 className="text-black font-extrabold text-5xl">
+                <h1 className="text-black font-Montserrat font-extrabold text-5xl">
                     {project.title}</h1>
-                <h1 className="text-black mt-12 pr-8">
-                    {project.description}</h1>
+                <p className="text-l font-Montserrat font-semibold text-black mt-12 pr-8 ">
+                    {project.title} <span className="text-[#0065EF] font-Montserrat font-semibold">Listado de foros de la comunidad</span></p>   
+                <p className="text-l font-Montserrat text-black mt-4 pr-8 ">
+                    {project.description}</p>
             </div>
             <div className="col-span-2 pt-8">
-                <h1 className="ml-20 text-black font-extrabold text-5xl">
+                <h1 className="ml-20 text-black font-Montserrat font-extrabold text-5xl">
                     Listado de foros de la comunidad</h1>
-                
+                    <ForumSection/>
             </div>
         </div>
     </main>
