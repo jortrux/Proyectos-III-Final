@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+//npm install @nextui-org/dropdown para que funcione
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/dropdown';
 import styles from '../styles/BurgerMenu.module.css';
 import './Navbar.css'
 
@@ -13,8 +15,11 @@ import closeImage from '../resources/images/close.png'
 import lupeImage from '../resources/images/find.png'
 import profileImage from '../resources/images/profile.png'
 import logoImage from '../resources/images/logo.png'
+import logoImageLarge from '../resources/images/logoLarge.png'
 import sunImage from '../resources/images/sun.png'
 import moonImage from '../resources/images/moon.png'
+import notificationIcon from '../resources/images/notificationIcon.png'
+import NotificationSection from "../components/NotificationSection";
 
 
 //Después de CSS
@@ -40,7 +45,12 @@ export default function Navbar() {
     return (
         <main>
             <div className="navbar">
-                <button className="btn" onClick={toggleMenu}><Image src={hamburgerImage} alt="Close Image" whidth={25} height={25}></Image> </button>
+                <div className="block md:hidden">
+                    <button className="btn" onClick={toggleMenu}><Image src={hamburgerImage} alt="Close Image" whidth={25} height={25}></Image> </button>
+                </div>
+                <div className="hidden md:block">
+                    <button className="btn" onClick={home}><Image src={logoImageLarge} alt="Close Image" whidth={25} height={25}></Image> </button>
+                </div>
                 <ul className="d-flex align-items-center mb-0 me-2">
                     <li>
                         <button className="btn" onClick={search}><Image src={lupeImage} alt="Lupe Image" whidth={25} height={25}></Image></button>
@@ -48,9 +58,22 @@ export default function Navbar() {
                     <li>
                         <button className="btn" onClick={profile}><Image src={profileImage} alt="Profile Image" whidth={25} height={25}></Image></button>
                     </li>
-                    {<li>
-                        <button className="btn" onClick={home}><Image src={logoImage} alt="Logo Image" whidth={25} height={25}></Image></button>
-                    </li>}
+                    <li className="hidden md:block">
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <button className="btn" type="button" id="dropDownNotifications"><Image src={notificationIcon} alt="Logo Image" whidth={25} height={25}></Image></button>
+                            </DropdownTrigger>
+                            <DropdownMenu className="hidden md:blockz">
+                                <DropdownItem><NotificationSection/></DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </li>
+                    <li className="hidden md:block">
+                        <button className="btn " onClick={home}>EN </button>
+                    </li>
+                    <li className="block md:hidden">
+                        <button className="btn " onClick={home}><Image src={logoImage} alt="Logo Image" whidth={25} height={25}></Image></button>
+                    </li> 
                 </ul>
             </div>
             <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
