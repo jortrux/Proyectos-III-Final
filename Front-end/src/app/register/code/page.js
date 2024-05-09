@@ -7,6 +7,12 @@ import { useState, useRef, useEffect } from 'react'
 import backArrow from "../../../resources/images/backArrow.png"
 
 export default function Code() {
+  //Variable de si ha saltado error
+  var error = true;
+
+  const handleErrorMessage = () =>{
+    error = !error;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,7 +92,7 @@ export default function Code() {
                     value={code}
                     onChange={e => handleChange(index, e)}
                     onKeyDown={e => handleKeyDown(index, e)}
-                    className="w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 md:border-blue-500 rounded focus:outline-none"
+                    className={error ? "w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-red-500 font-bold border-2 border-red-500 rounded focus:outline-none" : "w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 md:border-blue-500 rounded focus:outline-none"}
                   />
                 ))}
               </div>
