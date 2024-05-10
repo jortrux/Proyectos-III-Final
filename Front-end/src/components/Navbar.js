@@ -46,21 +46,21 @@ export default function Navbar() {
         Router.push('') //Aqui va la ruta de la pagina de perfil
     }
     const actividades = () => {
-        Router.push('@/app/activities') //Aqui va la ruta de la pagina de perfil
+        Router.push('/activities') //Aqui va la ruta de la pagina de perfil
     }
     return (
         <main>
-            <div className="flex grid grid-cols-5 border-b-2">
+            <div className="flex grid grid-cols-8 border-b-2">
                 <div className="block md:hidden">
-                    <button className="btn" onClick={toggleMenu}><Image src={hamburgerImage} alt="Close Image" whidth={25} height={25}></Image> </button>
+                    <button className="btn" onClick={toggleMenu}><Image src={hamburgerImage} alt="Close Image" whidth={50} height={50}></Image> </button>
                 </div>
                 <div className="hidden md:block">
-                    <button className="btn" onClick={home}><Image src={logoImageLarge} alt="Close Image" whidth={25} height={25}></Image> </button>
+                    <button className="btn" onClick={home}><Image src={logoImageLarge} alt="Close Image" whidth={75} height={75}></Image> </button>
                 </div>
                 <div className="hidden col-span-1 md:flex">
                 <Dropdown className="flex">
                         <DropdownTrigger>
-                            <button className="btn text-black">Actividades</button>
+                            <button className="text-black"><h1>Actividades</h1></button>
                         </DropdownTrigger>
                         <DropdownMenu className='text-black'>
                             <DropdownItem><button onClick={actividades}>Todas las Actividades</button></DropdownItem>
@@ -70,19 +70,19 @@ export default function Navbar() {
                 </div>
                 
                 <div className="hidden col-span-1 md:flex">
-                    <button className="btn text-black" onClick={comunidades}>Comunidades</button>
+                    <button className="btn text-black" onClick={comunidades}><h1>Comunidades</h1></button>
                 </div>
-                <ul className="flex align-items-center col-span-1 col-end-6 place-self-end">
+                <ul className="flex align-items-center col-span-1 col-end-9 place-self-center">
                     <li className='items-stretch'>
-                        <button className="btn" onClick={search}><Image src={lupeImage} alt="Lupe Image" whidth={25} height={25}></Image></button>
+                        <button className="btn" onClick={search}><Image src={lupeImage} alt="Lupe Image" whidth={50} height={50}></Image></button>
                     </li>
                     <li className='items-stretch'>
-                        <button className="btn" onClick={profile}><Image src={profileImage} alt="Profile Image" whidth={25} height={25}></Image></button>
+                        <button className="btn" onClick={profile}><Image src={profileImage} alt="Profile Image" whidth={50} height={50}></Image></button>
                     </li>
                     <li className="hidden md:block items-stretch">
                         <Dropdown>
                             <DropdownTrigger>
-                                <button className="btn" type="button" id="dropDownNotifications"><Image src={notificationIcon} alt="Logo Image" whidth={25} height={25}></Image></button>
+                                <button className="btn" type="button" id="dropDownNotifications"><Image src={notificationIcon} alt="Logo Image" whidth={50} height={50}></Image></button>
                             </DropdownTrigger>
                             <DropdownMenu className="hidden md:block">
                                 <DropdownItem><NotificationSection/></DropdownItem>
@@ -93,12 +93,12 @@ export default function Navbar() {
                         <button className="btn " onClick={home}>EN </button>
                     </li>
                     <li className="block md:hidden items-stretch">
-                        <button className="btn " onClick={home}><Image src={logoImage} alt="Logo Image" whidth={25} height={25}></Image></button>
+                        <button className="btn " onClick={home}><Image src={logoImage} alt="Logo Image" whidth={50} height={50}></Image></button>
                     </li> 
                 </ul>
             </div>
             <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
-                <button className="btn mt-2 ms-1" whidth={25} height={25} onClick={toggleMenu}><Image src={closeImage} alt="Close Image" whidth={25} height={25}></Image> </button>
+                <button className="btn mt-2 ms-1" whidth={50} height={50} onClick={toggleMenu}><Image src={closeImage} alt="Close Image" whidth={50} height={50}></Image> </button>
                 <ul className="d-flex flex-column align-items-center list-unstyled">
                     <li>
                         <Link href="/register">Actividades(No tiene link todavia)</Link>
@@ -117,7 +117,7 @@ export default function Navbar() {
                     </li>
                 </ul>
                 <div className="align-self-end d-flex">
-                    <button className="btn ms-1 me-auto p-2"><Image src={sunImage} alt="Light/Dark mode Image" whidth={25} height={25}></Image></button>
+                    <button className="btn ms-1 me-auto p-2"><Image src={sunImage} alt="Light/Dark mode Image" whidth={50} height={50}></Image></button>
                     <button className="btn me-2 ms-auto p-2"> EN (Español)</button>
                 </div>
             </div>
