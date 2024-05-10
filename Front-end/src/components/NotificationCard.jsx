@@ -10,7 +10,7 @@ const NotificationCard = ({ imgUrl, description, id, date }) => {
             <div className="col-span-1 grid items-center justify-items-center relative group">
                 <Image src={getImg(id, imgUrl)} width={50} height={50} className="rounded-full"></Image>
             </div>
-            <div className="col-span-3 grid grid-rows-5">
+            <div className="col-span-3 grid grid-rows-5 text-black">
                 <div className="row-span-1 flex">
                     <p className="text-xs font-light font-Montserrat m-0">{date}</p>
                 </div>

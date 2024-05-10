@@ -4,11 +4,9 @@ import { useRouter } from 'next/navigation';
 //npm install @nextui-org/dropdown para que funcione
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/dropdown';
 import styles from '../styles/BurgerMenu.module.css';
-import './Navbar.css'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import 'bootstrap/dist/css/bootstrap.min.css';
 /*Imagenes a usar*/
 import hamburgerImage from '../resources/images/menu.png'
 import closeImage from '../resources/images/close.png'
@@ -22,8 +20,7 @@ import notificationIcon from '../resources/images/notificationIcon.png'
 import NotificationSection from "../components/NotificationSection";
 
 
-//Después de CSS
-import './Navbar.css'
+
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -42,36 +39,60 @@ export default function Navbar() {
     const profile = () => {
         Router.push('./profile/') //Aqui va la ruta de la pagina de perfil
     }
+    const comunidades = () => {
+        Router.push('./communities/') //Aqui va la ruta de la pagina de perfil
+    }
+    const historialActividades = () => {
+        Router.push('') //Aqui va la ruta de la pagina de perfil
+    }
+    const actividades = () => {
+        Router.push('@/app/activities') //Aqui va la ruta de la pagina de perfil
+    }
     return (
         <main>
-            <div className="navbar">
+            <div className="flex grid grid-cols-5 border-b-2">
                 <div className="block md:hidden">
                     <button className="btn" onClick={toggleMenu}><Image src={hamburgerImage} alt="Close Image" whidth={25} height={25}></Image> </button>
                 </div>
                 <div className="hidden md:block">
                     <button className="btn" onClick={home}><Image src={logoImageLarge} alt="Close Image" whidth={25} height={25}></Image> </button>
                 </div>
-                <ul className="d-flex align-items-center mb-0 me-2">
-                    <li>
+                <div className="hidden col-span-1 md:flex">
+                <Dropdown className="flex">
+                        <DropdownTrigger>
+                            <button className="btn text-black">Actividades</button>
+                        </DropdownTrigger>
+                        <DropdownMenu className='text-black'>
+                            <DropdownItem><button onClick={actividades}>Todas las Actividades</button></DropdownItem>
+                            <DropdownItem><button onClick={historialActividades}>Historial de Actividades</button></DropdownItem>
+                        </DropdownMenu>
+                </Dropdown>
+                </div>
+                
+                <div className="hidden col-span-1 md:flex">
+                    <button className="btn text-black" onClick={comunidades}>Comunidades</button>
+                </div>
+                <ul className="flex align-items-center col-span-1 col-end-6 place-self-end">
+                    <li className='items-stretch'>
                         <button className="btn" onClick={search}><Image src={lupeImage} alt="Lupe Image" whidth={25} height={25}></Image></button>
                     </li>
-                    <li>
+                    <li className='items-stretch'>
                         <button className="btn" onClick={profile}><Image src={profileImage} alt="Profile Image" whidth={25} height={25}></Image></button>
                     </li>
-                    <li className="hidden md:block">
+                    <li className="hidden md:block items-stretch">
                         <Dropdown>
                             <DropdownTrigger>
                                 <button className="btn" type="button" id="dropDownNotifications"><Image src={notificationIcon} alt="Logo Image" whidth={25} height={25}></Image></button>
                             </DropdownTrigger>
-                            <DropdownMenu className="hidden md:blockz">
+                            <DropdownMenu className="hidden md:block">
                                 <DropdownItem><NotificationSection/></DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </li>
-                    <li className="hidden md:block">
+                    <li className="hidden md:block items-stretch">
                         <button className="btn " onClick={home}>EN </button>
                     </li>
-                    <li className="block md:hidden">
+                    <li className="block md:hidden items-stretch">
                         <button className="btn " onClick={home}><Image src={logoImage} alt="Logo Image" whidth={25} height={25}></Image></button>
                     </li> 
                 </ul>
