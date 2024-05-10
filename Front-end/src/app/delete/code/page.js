@@ -7,6 +7,12 @@ import { useState, useRef, useEffect } from 'react'
 import backArrow from "../../../resources/images/backArrow.png"
 
 export default function Code() {
+  //Variable de si ha saltado error
+  var error = true;
+
+  const handleErrorMessage = () =>{
+    error = !error;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,10 +91,16 @@ export default function Code() {
                     value={code}
                     onChange={e => handleChange(index, e)}
                     onKeyDown={e => handleKeyDown(index, e)}
-                    className="w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 md:border-blue-500 rounded focus:outline-none"
+                    className={error ? "w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-red-500 font-bold border-2 border-red-500 rounded focus:outline-none" : "w-12 h-12 md:h-16 text-center text-3xl font-Montserrat text-gray-600 font-bold border-2 border-gray-400 md:border-blue-500 rounded focus:outline-none"}
                   />
                 ))}
               </div>
+            </div>
+            <div className={error ? "flex justify-center mt-1" : "flex justify-center mt-1 hidden"}>
+              <svg className="" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.9875 33C14.6042 33 14.3208 32.8333 14.1375 32.5C13.9542 32.1667 13.9542 31.8333 14.1375 31.5L23.3875 15.5C23.5708 15.1667 23.8625 15 24.2625 15C24.6625 15 24.9542 15.1667 25.1375 15.5L34.3875 31.5C34.5708 31.8333 34.5708 32.1667 34.3875 32.5C34.2042 32.8333 33.9208 33 33.5375 33H14.9875ZM24.2625 22C23.9792 22 23.7418 22.0957 23.5505 22.287C23.3585 22.479 23.2625 22.7167 23.2625 23V26C23.2625 26.2833 23.3585 26.5207 23.5505 26.712C23.7418 26.904 23.9792 27 24.2625 27C24.5458 27 24.7835 26.904 24.9755 26.712C25.1668 26.5207 25.2625 26.2833 25.2625 26V23C25.2625 22.7167 25.1668 22.479 24.9755 22.287C24.7835 22.0957 24.5458 22 24.2625 22ZM24.2625 30C24.5458 30 24.7835 29.904 24.9755 29.712C25.1668 29.5207 25.2625 29.2833 25.2625 29C25.2625 28.7167 25.1668 28.4793 24.9755 28.288C24.7835 28.096 24.5458 28 24.2625 28C23.9792 28 23.7418 28.096 23.5505 28.288C23.3585 28.4793 23.2625 28.7167 23.2625 29C23.2625 29.2833 23.3585 29.5207 23.5505 29.712C23.7418 29.904 23.9792 30 24.2625 30Z" fill="#F23F3F"/>
+              </svg>
+              <p className="text-red-500 text-xs font-light mt-2">El código introducido es incorrecto. Por favor, vuelve a introducirlo.</p>
             </div>
             <div className="flex justify-center mt-2">
                 <p className="text-blue-600 underline font-Montserrat">Volver a enviar un código</p>

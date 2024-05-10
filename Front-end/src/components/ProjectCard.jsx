@@ -3,6 +3,8 @@ import { PlusIcon, ChatBubbleOvalLeftEllipsisIcon, ArrowRightIcon} from '@heroic
 import Link from 'next/link'
 
 const ProjectCard = ({ imgUrl, title, description, id }) => {
+    console.log('ID en ActivityCard:', id);
+
   return (
     <div className="grid grid-cols-5">
         <div 
@@ -16,10 +18,11 @@ const ProjectCard = ({ imgUrl, title, description, id }) => {
             </div>
             <div className='flex self-end'>
                 <Link
-                    href="../activities"
+                    href={`../communities/${id}`}
+                    className="flex text-black mr-2"
                     >
                     <PlusIcon className='h-6 w-6 ext-[#14192C] cursor-pointer' />
-                    <h1>INFO</h1>
+                    <h1 className="text-sm">INFO</h1>
                 </Link>
                 <Link
                     href={`../communities/${id}`}

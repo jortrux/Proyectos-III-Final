@@ -3,7 +3,7 @@ const endpoint = "http://87.221.139.203:443/api/";
 export async function PedirMensajesDenunciados (){
     try {
         //Cambiar ruta
-        const response = await fetch(`${endpoint}activities/getActivity/661e450f75d0bf1500fbc73c`, {
+        const response = await fetch(`${endpoint}management/reportMessage`, {
           method: "GET",
           headers: {
           //Authorization: `Bearer ${tokenJWT}`,

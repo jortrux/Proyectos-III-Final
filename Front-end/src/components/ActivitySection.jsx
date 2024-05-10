@@ -1,54 +1,13 @@
 "use client"
 import {React, useState, useRef} from 'react'
-import ProjectCard from './ProjectCard'
+import ActivityCard from './ActivityCard'
 import ProjectTag from './ProjectTag'
 import { motion, useInView } from 'framer-motion'
 
-const projectsData = [
-    {
-        id: 1,
-        title: "Activity 1",
-        description: "This is a description of project 1",
-        imgUrl: "/1.png",
-        tag: ["All", "React"],
-    },
-    {
-        id: 2,
-        title: "Activity 2",
-        description: "This is a description of project 2",
-        imgUrl: "/2.png",
-        tag: ["All", "Node.js"],
-    },
-    {
-        id: 3,
-        title: "Activity 3",
-        description: "This is a description of project 3",
-        imgUrl: "/3.png",
-        tag: ["All", "Vue.js"],
-    },
-    {
-        id: 4,
-        title: "Activity 4",
-        description: "This is a description of project 4",
-        imgUrl: "/4.png",
-        tag: ["All", "React"],
-    },
-    {
-        id: 5,
-        title: "Activity 5",
-        description: "This is a description of project 5",
-        imgUrl: "/5.png",
-        tag: ["All", "Node.js"],
-    },
-    {
-        id: 6,
-        title: "Activity 6",
-        description: "This is a description of project 6",
-        imgUrl: "/6.png",
-        tag: ["All", "Vue.js"],
-    },
-]
-const ProjectsSection = () => {
+import  projectsData  from './activities'
+
+
+const ActivitySection = () => {
     const [tags, setTags] = useState(new Set(["All"]));
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -95,55 +54,137 @@ const ProjectsSection = () => {
 
     return (
         <section>
-            <div className='text-white flex flex-wrap justify-start items-center gap-2 py-6'>
-                <h2 className='text-start text-2xl font-bold text-white'>
-                    Filtrar por:
+            <div className='text-white justify-start items-center gap-2 py-6'>
+                <h2 className='text-start text-lg font-normal font-Montserrat text-black'>
+                    Filtrar actividades por:
                 </h2>
-                <ProjectTag
-                    onClick={handleTagChange}
-                    name="All"
-                    isSelected={tags.has("All")}
-                />
-                <ProjectTag
-                    onClick={handleTagChange}
-                    name="React"
-                    isSelected={tags.has("React")}
-                />
-                <ProjectTag
-                    onClick={handleTagChange}
-                    name="Node.js"
-                    isSelected={tags.has("Node.js")}
-                />
-                <ProjectTag
-                    onClick={handleTagChange}
-                    name="Vue.js"
-                    isSelected={tags.has("Vue.js")}
-                />
+                <div className="flex flex-wrap gap-2 mt-8 items-center">
+                    <h2 className="text-2xl font-semibold text-black font-Montserrat">
+                        ÁMBITO:
+                    </h2>
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="All"
+                        isSelected={tags.has("All")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Diseño digital"
+                        isSelected={tags.has("Diseño digital")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Animacion"
+                        isSelected={tags.has("Animacion")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Videojuegos"
+                        isSelected={tags.has("Videojuegos")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Ingenieria"
+                        isSelected={tags.has("Ingenieria")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Realidad Virtual"
+                        isSelected={tags.has("Realidad Virtual")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Efectos Visuales"
+                        isSelected={tags.has("Efectos Visuales")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Matematicas"
+                        isSelected={tags.has("Matematicas")}
+                    />
+                </div>
+                <div className="flex flex-wrap gap-2 items-center mt-4">
+                    <h2 className="text-2xl font-semibold text-black font-Montserrat">
+                        TÍTULO:
+                    </h2>
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Grado"
+                        isSelected={tags.has("Grado")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Postgrado"
+                        isSelected={tags.has("Postgrado")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Ciclo formativo"
+                        isSelected={tags.has("Ciclo formativo")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Otro"
+                        isSelected={tags.has("Otro")}
+                    />
+                    <h2 className="ml-10 text-2xl font-semibold text-black font-Montserrat">
+                        CURSO:
+                    </h2>
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Primero"
+                        isSelected={tags.has("Primero")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Segundo"
+                        isSelected={tags.has("Segundo")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Tercero"
+                        isSelected={tags.has("Tercero")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="Cuarto"
+                        isSelected={tags.has("Cuarto")}
+                    />
+                </div>
+                <div className="flex flex-wrap gap-2 items-center mt-4">
+                    <h2 className="text-2xl font-semibold text-black font-Montserrat">
+                        GRUPO:
+                    </h2>
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="A"
+                        isSelected={tags.has("A")}
+                    />
+                    <ProjectTag
+                        onClick={handleTagChange}
+                        name="B"
+                        isSelected={tags.has("B")}
+                    />
+                    
+                </div>
                 
             </div>
-            <h2 className='text-start text-3xl font-bold text-white mb-4'>
+            <h2 className='text-start text-2xl font-semibold text-[#0065EF] mb-4'>
                 Proximas Actividades
             </h2>
             <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
                 {filteredProjects.map((project, index) => (
-                    <motion.li
-                        key={index}
-                        variants={cardVariants}
-                        initial="initial"
-                        animate={isInView ? "animate" : "initial"}
-                        transition={{ duration: 0.4, delay: 0.3 }}
-                    >
-                        <ProjectCard
-                            key={project.id}
-                            title={project.title}
-                            description={project.description}
-                            imgUrl={project.imgUrl}
-                        />
-                    </motion.li>
+                    <ActivityCard
+                        id={project.id}
+                        title={project.title}
+                        description={project.description}
+                        imgUrl={project.imgUrl}
+                        tag={project.tag}
+                    />
                 ))}
             </ul>
         </section>
     );
 };
 
-export default ProjectsSection;
+export default ActivitySection;
