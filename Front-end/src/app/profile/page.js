@@ -71,7 +71,6 @@ function Perfil(){
     return(
         <div className="text-center">
                 <CurrentProfile/>
-                <button className="text-center mt-3" onClick={handleEdit}>Editar</button>
         </div>
            
     )
