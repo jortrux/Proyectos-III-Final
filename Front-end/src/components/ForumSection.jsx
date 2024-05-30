@@ -7,47 +7,48 @@ import { motion, useInView } from 'framer-motion'
 const forumData = [
     {
         id: 1,
-        title: "Digital Design Forum",
-        description: "A community forum for digital designers to discuss trends, techniques, and tools.",
+        title: "Foro de Diseño Digital",
+        description: "Un foro comunitario para diseñadores digitales para discutir tendencias, técnicas y herramientas.",
         imgUrl: "/1.png",
-        tag: ["All", "Design"],
+        tag: ["All", "Diseño"],
     },
     {
         id: 2,
-        title: "UI/UX Discussion",
-        description: "Engage in conversations about user interface and user experience design principles.",
+        title: "Discusión de UI/UX",
+        description: "Participa en conversaciones sobre principios de diseño de interfaz de usuario y experiencia de usuario.",
         imgUrl: "/2.png",
-        tag: ["All", "UI/UX", "Web Design"],
+        tag: ["All", "UI/UX", "Diseño Web"],
     },
     {
         id: 3,
-        title: "Graphic Design Corner",
-        description: "Connect with fellow graphic designers and share tips, resources, and inspiration.",
+        title: "Rincón de Diseño Gráfico",
+        description: "Conéctate con otros diseñadores gráficos y comparte consejos, recursos e inspiración.",
         imgUrl: "/3.png",
-        tag: ["All", "Graphic Design"],
+        tag: ["All", "Diseño Gráfico"],
     },
     {
         id: 4,
-        title: "Web Design Q&A",
-        description: "Ask questions, seek advice, and exchange knowledge about web design best practices.",
+        title: "Preguntas y Respuestas de Diseño Web",
+        description: "Haz preguntas, busca consejos e intercambia conocimientos sobre las mejores prácticas de diseño web.",
         imgUrl: "/4.png",
-        tag: ["All", "Web Design"],
+        tag: ["All", "Diseño Web"],
     },
     {
         id: 5,
-        title: "Motion Graphics Hub",
-        description: "Explore the world of motion graphics, animation techniques, and visual effects.",
+        title: "Centro de Motion Graphics",
+        description: "Explora el mundo de los motion graphics, técnicas de animación y efectos visuales.",
         imgUrl: "/5.png",
         tag: ["All", "Motion Graphics"],
     },
     {
         id: 6,
-        title: "Digital Art Gallery",
-        description: "Showcase your digital artwork, receive feedback, and discover new talents.",
+        title: "Galería de Arte Digital",
+        description: "Muestra tu arte digital, recibe comentarios y descubre nuevos talentos.",
         imgUrl: "/6.png",
-        tag: ["All", "Digital Art"],
+        tag: ["All", "Arte Digital"],
     },
 ];
+
 
 const ForumSection = () => {
     const [tags, setTags] = useState(new Set(["All"]));
@@ -144,6 +145,7 @@ const ForumSection = () => {
                             title={project.title}
                             description={project.description}
                             imgUrl={project.imgUrl}
+                            id={project.id}
                         />
                     </motion.li>
                 ))}
