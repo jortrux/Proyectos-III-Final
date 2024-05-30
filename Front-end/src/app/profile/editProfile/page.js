@@ -171,51 +171,53 @@ function EditarPerfil(){
       }
 
     return (
-        <div className="bg-[#FFFFFF]">
+        <div className="bg-[#FFFFFF] sm:h-[909px]">
             <div className={error ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
             <div className={salir ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
             <div className="opacity-100">
                 <div className="absolute left-2 top-20">
-                    <button className="flex-1 justify-center block font-semibold sm:mt-[30px]">
-                        <Image 
-                            src= {BackArrow} 
-                            width={30} 
-                            height={30} 
-                            className="rounded-full" 
-                            alt="back"
-                            onClick={ irAtras}
-                            />
+                    <button className="flex-1 justify-center block font-semibold sm:mt-[25px]">
+                        <div className="sm:w-12 sm:h-12 w-8 h-8">
+                            <Image 
+                                src= {BackArrow} 
+                                width={48} 
+                                height={48} 
+                                className="rounded-full" 
+                                alt="back"
+                                onClick={ irAtras}
+                                />
+                        </div>
                     </button>
                 </div>
-                <div className="text-center max-w-lg max-h-sm mx-auto sm:max-w-xl left-0 top-25  p-1 sm:text-left">
-                    <div className="container mx-auto p-4 flex rounded-lg justify-center">
+                <div className="text-center max-w-lg max-h-sm mx-auto sm:max-w-xl left-0 top-25  p-1 sm:text-left sm:h-[88px] sm:p-[32px] sm:p-8">
+                    <div className="container mx-auto p-4 flex rounded-lg justify-center sm: p-0">
                         <h1 className="font-extrabold font-Montserrat text-3xl sm:text-5xl sm:absolute sm:left-20 sm:top-13">Editar perfil</h1>
                     </div>
                 </div>
-                <div className="max-w-lg max-h-sm mx-auto sm:max-w-4xl left-0 top-25 p-1">
-                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
-                        <div className="sm:flex-row items-center mt-4 ">
-                            <div className="sm:flex items-center mt-4 flex-1 ">
-                                <div className="max-w-sm max-h-sm mx-auto h-45 sm: left-0 top-25 max-w-7xl flex-1 ">
-                                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
+                
+                    <div className="container mx-auto mt-[-20px] flex flex-col rounded-lg sm:p-[72px]">
+                        <div className="sm:flex-row items-center sm:w-[906px] sm:items-center">
+                            <div className="sm:flex items-center flex-1 ">
+                                <div className="max-w-sm max-h-sm mx-auto h-45 sm: left-0 top-25 max-w-7xl flex-1 sm:p-[36px]">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg sm:p-0 sm:h-[288px]">
                                         <div className="flex justify-center items-baseline">
-                                            <div className="relative">
+                                            <div className="relative sm:w-60 sm:h-60 w-32 h-32">
                                             <Image 
                                                 src={image} 
                                                 alt="profile picture"
-                                                width={200}
-                                                height={200}
+                                                width={247}
+                                                height={247}
                                                 style={{
                                                     borderRadius: '50%', // Esto reemplaza a 'rounded-full'
-                                                    marginTop: '-80px', // Esto reemplaza a 'mt-[-80px]'
+                                                    marginTop: '0px', // Esto reemplaza a 'mt-[-80px]'
                                                     borderWidth: '4px',
                                                     borderColor: colorFondo // Usando el estado de colorFondo directamente
                                                 }}
                                             />
-                                                <label className="absolute bottom-0 right-0  rounded-full p-2"
+                                                <label className="absolute bottom-0 right-0  rounded-full h-[48px] w-[48px] sm:h-[92px] sm:w-[92px]"
                                                 htmlFor = "selector"
                                                 >
-                                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg  viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M4 24C4 12.9543 12.9543 4 24 4C35.0457 4 44 12.9543 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24Z" fill="#0065EF"/>
                                                     <path d="M14 29.8339V34H18.1661L30.4533 21.7128L26.2872 17.5467L14 29.8339ZM33.675 18.491C34.1083 18.0578 34.1083 17.3579 33.675 16.9246L31.0754 14.325C30.6421 13.8917 29.9422 13.8917 29.509 14.325L27.4759 16.358L31.642 20.5241L33.675 18.491Z" fill="white"/>
                                                     </svg>
@@ -231,14 +233,14 @@ function EditarPerfil(){
                                                 />
                                             </div>
                                         </div>
-                                        <p className="text-xs text-gray-600 mt-2 text-center mb-[-18px]">
+                                        <p style={{ fontSize: '18px' }} className="text-xs text-gray-600 mt-2 text-center mb-[-18px] sm:pt-[32px]">
                                             La fotografía deberá subirse en formato jpg o .png.
                                         </p>
                                     </div>
                                 </div>
-                                <div className="max-w-sm max-h-sm mx-auto items-baseline h-100 sm: left-0 top-25 max-w-sm flex-1 mt-[-28px] ">
-                                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
-                                        <div className="flex items-center mt-4">
+                                <div className=" max-h-sm mx-auto items-baseline h-[343px] sm: left-0 top-25  flex-1 sm:p-[36px] sm:w-[513px]">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg sm:p-0 sm:w-[513px]">
+                                        <div className="flex items-center ">
                                             <div className="flex-1">
                                                 <label className="block text-sm font-semibold text-gray-700">Nombre</label>
                                                 <input 
@@ -246,21 +248,21 @@ function EditarPerfil(){
                                                     placeholder='Nombre' 
                                                     value={nameBorrador}
                                                     onChange={(e) => setNameBorrador(e.target.value)}
-                                                    className="p-1 border rounded w-40 "
+                                                    className="p-1 border rounded w-full"
                                                 />
                                             </div>
-                                            <div className="flex-1 ml-2">
+                                            <div className="flex-1 ml-2 ">
                                                 <label className="block text-sm font-semibold text-gray-700">Apellido/s</label>
                                                 <input 
                                                     type='text' 
                                                     placeholder='Apellido/s' 
                                                     value={apellido1Borrador}
                                                     onChange={(e) => setApellido1Borrador(e.target.value)}
-                                                    className="p-1 border rounded w-40"
+                                                    className="p-1 border rounded w-full"
                                                 />
                                             </div>
                                         </div>
-                                        <div className="mt-4">
+                                        <div className="mt-4 sm:pt-[32px]">
                                             <label className="block text-sm font-semibold text-gray-700">BIOGRAFÍA</label>
                                             <textarea 
                                                     placeholder='Biografía' 
@@ -272,31 +274,31 @@ function EditarPerfil(){
                                                 />
                                             <p className="text-right text-xs text-gray-600">{bio.length}/200 caracteres</p>
                                         </div>
-                                        <div className="flex items-center justify-between mt-4 mt-[-28px]">
+                                        <div className="flex items-center justify-between mt-4 mt-[-28px] pt-[32px]">
                                             <label className="text-sm text-gray-700 w-3/4 mt-[40px]" for="public_activities">Mostrar en tu perfil público las actividades a las que has asistido</label>
                                             <ToggleSwitch enabled={validoBorrador} setEnabled={setValidoBorrador} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="max-w-sm max-h-sm mx-auto sm: left-0 top-25 max-w-sm sm:ml-[-28px] sm:mt-[-70px] ">
-                                <div className="container mx-auto p-4 flex flex-col rounded-lg ">
-                                    <div className="mt-6 space-y-4 sm:ml-[80px]">
-                                        <button 
-                                        className="w-full bg-white text-blue-600 py-2 rounded border-2"
-                                        onClick={handleErrorMessage}
-                                        >CERRAR SESIÓN</button>
-                                        <button className="w-full bg-white text-red-500 py-2 rounded border-2 border-red-500">ELIMINAR CUENTA</button>
-                                        <button 
-                                        className="w-full bg-blue-600 text-white py-2 rounded"
-                                        onClick={guardarCambios}>
-                                            GUARDAR CAMBIOS
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <div className="max-w-sm max-h-sm mx-auto sm: left-0 top-25 max-w-sm sm:ml-[-28px] sm:mt-[-20px] ">
+									<div className="container mx-auto p-4 flex flex-col rounded-lg ">
+										<div className="mt-6 space-y-4 sm:ml-[80px]">
+											<button 
+											className="w-full bg-white text-blue-600 py-2 rounded border-2"
+											onClick={handleErrorMessage}
+											>CERRAR SESIÓN</button>
+											<button className="w-full bg-white text-red-500 py-2 rounded border-2 border-red-500">ELIMINAR CUENTA</button>
+											<button 
+											className="w-full bg-blue-600 text-white py-2 rounded"
+											onClick={guardarCambios}>
+												GUARDAR CAMBIOS
+											</button>
+										</div>
+									</div>
+								</div>
                         </div>
-                    </div>
+                  
                 </div>
             </div>
             <div className={error ? "fixed inset-0 flex items-center justify-center z-50" : "hidden"}>
