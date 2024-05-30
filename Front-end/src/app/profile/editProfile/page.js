@@ -14,28 +14,29 @@ function EditarPerfil(){
 	
     const [colorFondo, setColorFondo] = useState('#FFE802');
     const [error, setError] = useState(false);
+    const [salir, setSalir] = useState(false);
 	//definir todas las variables necesarias
     const router = useRouter()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordrep, setPasswordrep] = useState("")
-    const [name, setName] = useState("Oscar")
-    const [bio, setBio] = useState("hola soy estudiante")
-    const [apellido1, setApellido1] = useState("Maestre Gonzalez")
+    const [name, setName] = useState("Elisa")
+    const [bio, setBio] = useState("Me gustan las películas de ciencia ficción y juego al voleibol :)")
+    const [apellido1, setApellido1] = useState("Rodríguez López")
 	const [genero, setGenero] = useState("")
     const [grado, setGrado] = useState("")
     const [año, setAño] = useState(0)
-    const [valido, setValido] = useState("")
+    const [valido, setValido] = useState(false)
     const [rol, setRol] = useState("")
     const [image, setImage] = useState(ProfileTemp)
     const [tag, setTag] = useState("estudiante")
     const [tagList, setTagList] = useState([])
 
-    const [nameBorrador, setNameBorrador] = [name, setName]
-    const [apellido1Borrador, setApellido1Borrador] = [apellido1, setApellido1]
-    const [bioBorrador, setBioBorrador] = [bio, setBio]
-    const [validoBorrador, setValidoBorrador] = [valido, setValido]
-    const [imageBorrador, setImageBorrador] = [image, setImage]
+    const [nameBorrador, setNameBorrador] = useState(name)
+    const [apellido1Borrador, setApellido1Borrador] = useState(apellido1)
+    const [bioBorrador, setBioBorrador] = useState(bio)
+    const [validoBorrador, setValidoBorrador] = useState(valido)
+    const [imageBorrador, setImageBorrador] = useState(image)
 
     useEffect(() => {
         const almacenTags = JSON.parse(localStorage.getItem('tags')) || [];
@@ -112,8 +113,7 @@ function EditarPerfil(){
                   onChange={() => setEnabled(!enabled)}
                 />
                 {/* Este es el fondo del toggle switch */}
-                <div className={`block bg-gray-200 w-10 h-6 rounded-full transition ${
-                  enabled ? 'block bg-blue-400 w-10 h-6 rounded-full ' : ''}`}></div>
+                <div className={`block w-10 h-6 rounded-full transition ${enabled ? 'bg-[#0065EF]' : 'bg-gray-200'}`}></div>
                 {/* Este es el círculo del toggle switch que se mueve */}
                 <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ${
                   enabled ? 'transform translate-x-4 ' : ''}`}></div>
@@ -123,6 +123,12 @@ function EditarPerfil(){
         );
       }
 
+      const handleChange = (e) => {
+        setNameBorrador(e.target.value);  // Actualiza el valor
+        console.log(e.target.value);  
+        console.log(nameBorrador);      // Imprime el nuevo valor
+        console.log(name);  
+    }; 
 
       function guardarCambios() {
         // Suponiendo que tienes variables o estados de los que obtendrás los nuevos valores
@@ -134,138 +140,206 @@ function EditarPerfil(){
     }
 
     function irAtras() {
-        window.location.href = 'http://localhost:3000/profile';
+        if(nameBorrador === name && apellido1Borrador === apellido1 && bioBorrador === bio && validoBorrador === valido && imageBorrador === image)
+            window.location.href = 'http://localhost:3000/profile';
+        else
+            handleSalirMessage();
     }
 
+    function atras() {
+        window.location.href = 'http://localhost:3000/profile';
+    }
     const handleErrorMessage = () =>{
-        if(error == "1")
-            setError("0");
+        if(error == false)
+            setError(true);
         else
-            setError("1");
+            setError(false);
+      }
+
+      const handleSalirMessage = () =>{
+        if(salir == false)
+            setSalir(true);
+        else
+            setSalir(false);
+      }
+
+      const handleToggleMessage = () =>{
+        if(validoBorrador == false)
+            setValidoBorrador(true);
+        else
+            setValidoBorrador(false);
       }
 
     return (
-        <div class="bg-[#FFFFFF]">
-            <div class="absolute left-2 top-20">
-                <button class="flex-1 justify-center block font-semibold sm:mt-[30px]">
-                    <Image 
-                        src= {BackArrow} 
-                        width={30} 
-                        height={30} 
-                        className="rounded-full" 
-                        alt="back"
-                        onClick={ irAtras}
-                        />
-                </button>
-            </div>
-            <div class="text-center max-w-lg max-h-sm mx-auto sm:max-w-xl left-0 top-25  p-1 sm:text-left">
-                <div class="container mx-auto p-4 flex rounded-lg justify-center">
-                    <h1 className="font-extrabold font-Montserrat text-3xl sm:text-5xl sm:absolute sm:left-20 sm:top-13">Editar perfil</h1>
+        <div className="bg-[#FFFFFF]">
+            <div className={error ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
+            <div className={salir ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
+            <div className="opacity-100">
+                <div className="absolute left-2 top-20">
+                    <button className="flex-1 justify-center block font-semibold sm:mt-[30px]">
+                        <Image 
+                            src= {BackArrow} 
+                            width={30} 
+                            height={30} 
+                            className="rounded-full" 
+                            alt="back"
+                            onClick={ irAtras}
+                            />
+                    </button>
                 </div>
-            </div>
-            <div class="max-w-lg max-h-sm mx-auto sm:max-w-4xl left-0 top-25 p-1">
-                <div class="container mx-auto p-4 flex flex-col rounded-lg ">
-                    <div class="sm:flex-row items-center mt-4 ">
-                        <div class="sm:flex items-center mt-4 flex-1 ">
-                            <div class="max-w-sm max-h-sm mx-auto h-45 sm: left-0 top-25 max-w-7xl flex-1 ">
-                                <div class="container mx-auto p-4 flex flex-col rounded-lg ">
-                                    <div class="flex justify-center items-baseline">
-                                        <div class="relative">
+                <div className="text-center max-w-lg max-h-sm mx-auto sm:max-w-xl left-0 top-25  p-1 sm:text-left">
+                    <div className="container mx-auto p-4 flex rounded-lg justify-center">
+                        <h1 className="font-extrabold font-Montserrat text-3xl sm:text-5xl sm:absolute sm:left-20 sm:top-13">Editar perfil</h1>
+                    </div>
+                </div>
+                <div className="max-w-lg max-h-sm mx-auto sm:max-w-4xl left-0 top-25 p-1">
+                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
+                        <div className="sm:flex-row items-center mt-4 ">
+                            <div className="sm:flex items-center mt-4 flex-1 ">
+                                <div className="max-w-sm max-h-sm mx-auto h-45 sm: left-0 top-25 max-w-7xl flex-1 ">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
+                                        <div className="flex justify-center items-baseline">
+                                            <div className="relative">
                                             <Image 
-                                                src= {image} 
-                                                className="rounded-full mt-[-80px] border-4 border-[#FFE802]" 
+                                                src={image} 
                                                 alt="profile picture"
-                                                width={200} 
-                                                height={200} 
+                                                width={200}
+                                                height={200}
+                                                style={{
+                                                    borderRadius: '50%', // Esto reemplaza a 'rounded-full'
+                                                    marginTop: '-80px', // Esto reemplaza a 'mt-[-80px]'
+                                                    borderWidth: '4px',
+                                                    borderColor: colorFondo // Usando el estado de colorFondo directamente
+                                                }}
                                             />
-                                            <label class="absolute bottom-0 right-0  rounded-full p-2"
-                                            htmlFor = "selector"
-                                            >
-                                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4 24C4 12.9543 12.9543 4 24 4C35.0457 4 44 12.9543 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24Z" fill="#0065EF"/>
-                                                <path d="M14 29.8339V34H18.1661L30.4533 21.7128L26.2872 17.5467L14 29.8339ZM33.675 18.491C34.1083 18.0578 34.1083 17.3579 33.675 16.9246L31.0754 14.325C30.6421 13.8917 29.9422 13.8917 29.509 14.325L27.4759 16.358L31.642 20.5241L33.675 18.491Z" fill="white"/>
-                                                </svg>
+                                                <label className="absolute bottom-0 right-0  rounded-full p-2"
+                                                htmlFor = "selector"
+                                                >
+                                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 24C4 12.9543 12.9543 4 24 4C35.0457 4 44 12.9543 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24Z" fill="#0065EF"/>
+                                                    <path d="M14 29.8339V34H18.1661L30.4533 21.7128L26.2872 17.5467L14 29.8339ZM33.675 18.491C34.1083 18.0578 34.1083 17.3579 33.675 16.9246L31.0754 14.325C30.6421 13.8917 29.9422 13.8917 29.509 14.325L27.4759 16.358L31.642 20.5241L33.675 18.491Z" fill="white"/>
+                                                    </svg>
 
-                                            </label>
-                                            <input class="absolute bottom-0 right-0 bg-blue-200 rounded-full p-2"
-                                                type="file" 
-                                                name="profileImage" 
-                                                id = "selector"
-                                                accept="image/*" 
-                                                className="hidden" 
-                                                onChange={handleImageChange}
-                                            />
+                                                </label>
+                                                <input className="absolute bottom-0 right-0 bg-blue-200 rounded-full p-2c hidden"
+                                                    type="file" 
+                                                    name="profileImage" 
+                                                    id = "selector"
+                                                    accept="image/*" 
+                                          
+                                                    onChange={handleImageChange}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p class="text-xs text-gray-600 mt-2 text-center mb-[-18px]">
-                                        La fotografía deberá subirse en formato jpg o .png.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="max-w-sm max-h-sm mx-auto items-baseline h-100 sm: left-0 top-25 max-w-sm flex-1 mt-[-28px] ">
-                                <div class="container mx-auto p-4 flex flex-col rounded-lg ">
-                                    <div class="flex items-center mt-4">
-                                        <div class="flex-1">
-                                            <label class="block text-sm font-semibold text-gray-700">Nombre</label>
-                                            <input 
-                                                type='text' 
-                                                placeholder='Nombre' 
-                                                value={nameBorrador}
-                                                onChange={(e) => setNameBorrador(e.target.value)}
-                                                className="p-1 border rounded w-40 "
-                                            />
-                                        </div>
-                                        <div class="flex-1 ml-2">
-                                            <label class="block text-sm font-semibold text-gray-700">Apellido/s</label>
-                                            <input 
-                                                type='text' 
-                                                placeholder='Apellido/s' 
-                                                value={apellido1Borrador}
-                                                onChange={(e) => setApellido1Borrador(e.target.value)}
-                                                className="p-1 border rounded w-40"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <label class="block text-sm font-semibold text-gray-700">BIOGRAFÍA</label>
-                                        <textarea 
-                                                placeholder='Biografía' 
-                                                value={bioBorrador}
-                                                onChange={(e) => setBioBorrador(e.target.value)}
-                                                className='p-2 border rounded w-full' 
-                                                rows="5"
-                                                cols="50" 
-                                            />
-                                        <p class="text-right text-xs text-gray-600">{bio.length}/200 caracteres</p>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-4 mt-[-28px]">
-                                        <label class="text-sm text-gray-700 w-3/4 mt-[40px]" for="public_activities">Mostrar en tu perfil público las actividades a las que has asistido</label>
-                                        <ToggleSwitch enabled={validoBorrador} setEnabled={setValidoBorrador} />
+                                        <p className="text-xs text-gray-600 mt-2 text-center mb-[-18px]">
+                                            La fotografía deberá subirse en formato jpg o .png.
+                                        </p>
                                     </div>
                                 </div>
+                                <div className="max-w-sm max-h-sm mx-auto items-baseline h-100 sm: left-0 top-25 max-w-sm flex-1 mt-[-28px] ">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg ">
+                                        <div className="flex items-center mt-4">
+                                            <div className="flex-1">
+                                                <label className="block text-sm font-semibold text-gray-700">Nombre</label>
+                                                <input 
+                                                    type='text' 
+                                                    placeholder='Nombre' 
+                                                    value={nameBorrador}
+                                                    onChange={(e) => setNameBorrador(e.target.value)}
+                                                    className="p-1 border rounded w-40 "
+                                                />
+                                            </div>
+                                            <div className="flex-1 ml-2">
+                                                <label className="block text-sm font-semibold text-gray-700">Apellido/s</label>
+                                                <input 
+                                                    type='text' 
+                                                    placeholder='Apellido/s' 
+                                                    value={apellido1Borrador}
+                                                    onChange={(e) => setApellido1Borrador(e.target.value)}
+                                                    className="p-1 border rounded w-40"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="mt-4">
+                                            <label className="block text-sm font-semibold text-gray-700">BIOGRAFÍA</label>
+                                            <textarea 
+                                                    placeholder='Biografía' 
+                                                    value={bioBorrador}
+                                                    onChange={(e) => setBioBorrador(e.target.value)}
+                                                    className='p-2 border rounded w-full' 
+                                                    rows="5"
+                                                    cols="50" 
+                                                />
+                                            <p className="text-right text-xs text-gray-600">{bio.length}/200 caracteres</p>
+                                        </div>
+                                        <div className="flex items-center justify-between mt-4 mt-[-28px]">
+                                            <label className="text-sm text-gray-700 w-3/4 mt-[40px]" for="public_activities">Mostrar en tu perfil público las actividades a las que has asistido</label>
+                                            <ToggleSwitch enabled={validoBorrador} setEnabled={setValidoBorrador} />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="max-w-sm xl:max-h-sm mx-auto sm: left-0 top-25 max-w-sm sm:ml-[-28px] sm:mt-[-70px] ">
-                            <div class="container mx-auto p-4 flex flex-col rounded-lg ">
-                                <div class="mt-6 space-y-4 sm:ml-[80px]">
-                                    <button 
-                                    class="w-full bg-white text-blue-600 py-2 rounded border-2"
-                                    onClick={handleErrorMessage}
-                                    >CERRAR SESIÓN</button>
-                                    <button class="w-full bg-white text-red-500 py-2 rounded border-2 border-red-500">ELIMINAR CUENTA</button>
-                                    <button 
-                                    class="w-full bg-blue-600 text-white py-2 rounded"
-                                    onClick={guardarCambios}>
-                                        GUARDAR CAMBIOS
-                                    </button>
+                            <div className="max-w-sm max-h-sm mx-auto sm: left-0 top-25 max-w-sm sm:ml-[-28px] sm:mt-[-70px] ">
+                                <div className="container mx-auto p-4 flex flex-col rounded-lg ">
+                                    <div className="mt-6 space-y-4 sm:ml-[80px]">
+                                        <button 
+                                        className="w-full bg-white text-blue-600 py-2 rounded border-2"
+                                        onClick={handleErrorMessage}
+                                        >CERRAR SESIÓN</button>
+                                        <button className="w-full bg-white text-red-500 py-2 rounded border-2 border-red-500">ELIMINAR CUENTA</button>
+                                        <button 
+                                        className="w-full bg-blue-600 text-white py-2 rounded"
+                                        onClick={guardarCambios}>
+                                            GUARDAR CAMBIOS
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={error ? "flex justify-center mt-1" : "flex justify-center mt-1 hidden"}>
-            <EmergeWindow/>
+            <div className={error ? "fixed inset-0 flex items-center justify-center z-50" : "hidden"}>
+                <div className="fixed flex items-center justify-center inset-0">
+                    <div className="bg-white border-2 p-8 shadow-lg rounded-lg mx-auto" >
+                        <h1 className="font-extrabold font-Montserrat text-4xl sm:text-5xl text-center mb-6">Cerrar sesión</h1>
+                        <p className="text-sm sm:text-lg text-gray-600 text-center mb-6 break-words">
+                        ¿Estás seguro/a de que quieres cerrar sesión?
+                        </p>
+                        <div className="max-w-sm max-h-sm mx-auto ">
+                            <div className="container mx-auto p-4 flex flex-col rounded-lg py-30 space-y-4">
+                                <button 
+                                    className=" item-center bg-blue-600 text-white py-3 rounded-full font-bold text-lg"
+                                >
+                                    sí, CERRAR SESIÓN
+                                </button>
+                                <button className="w-full bg-white text-blue-600 py-3 rounded-full border-2 border-blue-600 font-bold text-lg mb-[180px]" onClick={handleErrorMessage}>
+                                    NO, VOLVER
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={salir ? "fixed inset-0 flex items-center justify-center z-50" : "hidden"}>
+            <div className="fixed flex items-center justify-center inset-0">
+            <div className="bg-white border-2 p-8 shadow-lg rounded-lg mx-auto" >
+                <h1 className="font-extrabold font-Montserrat text-4xl sm:text-5xl text-center mb-6">Cambios sin guardar</h1>
+                <p className="text-sm sm:text-lg text-gray-600 text-center mb-6 break-words">
+                ¿Estás seguro/a de que quieres volver sin guardar los <br />cambios realizados?
+                </p>
+                <div className="max-w-sm max-h-sm mx-auto ">
+                    <div className="container mx-auto p-4 flex flex-col rounded-lg py-30 space-y-4">
+                        <button className=" item-center bg-blue-600 text-white py-3 rounded-full font-bold text-lg"  onClick={atras}>
+                            sí, VOLVER
+                        </button>
+                        <button className="w-full bg-white text-blue-600 py-3 rounded-full border-2 border-blue-600 font-bold text-lg mb-[180px]" onClick={handleSalirMessage}>
+                            NO, GUARDAR CAMBIOS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
             </div>
         </div>
     );

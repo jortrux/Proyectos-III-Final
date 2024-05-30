@@ -55,11 +55,12 @@ const projectsData = [
 ]
 
 export default function CurrentProfile() {
+    const [colorFondo, setColorFondo] = useState('#FFE802');
     const router = useRouter();
     const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [bio, setBio] = useState("")
-    const [tag, setTag] = useState("")
+    const [email, setEmail] = useState("elisa.rodriguez@live.u-tad.com")
+    const [bio, setBio] = useState("Me gustan las peliculas de ciencia ficción y el voleibol :)")
+    const [tag, setTag] = useState("2ºB ANIG")
 
     const handleEdit = () => {
         router.push("profile/editProfile");
@@ -67,7 +68,12 @@ export default function CurrentProfile() {
 
     return (   
         <div class = "bg-[#FFFFFF] sm:bg-[#FFE802]">
-            <div class="w-full max-h-sm mx-auto sm:max-w-7xl left-0 top-25 p-1 bg-[#FFE802] h-48 sm:bg-[#FFE802]">
+            <div 
+                className="w-full max-h-sm mx-auto sm:max-w-7xl left-0 top-25 p-1 h-48"
+                style={{
+                    backgroundColor: colorFondo // Aplicando el color de fondo dinámicamente
+                }}
+            >
                 <div class="absolute left-2 top-20">
                     <button class="flex-1 justify-center block font-semibold sm:hidden">
                         <Image 
@@ -106,10 +112,14 @@ export default function CurrentProfile() {
                             <div class="items-center container mx-auto p-4 flex flex-col rounded-lg">
                             <Image 
                                 src= {ProfileTemp} 
-                                className="rounded-full  border-4 border-[#FFE802]" 
                                 alt="profile picture"
                                 width={200} 
                                 height={200} 
+                                style={{
+                                    borderRadius: '9999px',  // Equivalente a 'rounded-full' en Tailwind
+                                    borderWidth: '4px',      // Equivalente a 'border-4'
+                                    borderColor: colorFondo  // Uso dinámico del color de fondo
+                                }}
                             />  
                             </div>
                         </div>

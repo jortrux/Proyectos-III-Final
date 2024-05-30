@@ -13,17 +13,26 @@ export default function CurrentProfile() {
     const [tag, setTag] = useState("")
 
     return (   
-        <div>
-            <h1 className="font-extrabold font-Montserrat text-3xl sm:text-5xl">Editar perfil</h1>
-            <p class="text-xs text-gray-600 mt-2 text-center mb-[-18px]">
-                ¿Estás seguro/a de que quieres volver sin guardar los cambios realizados? 
-            </p>
-            <button 
-                class="w-full bg-blue-600 text-white py-2 rounded"
-                >
-                    sí, VOLVER
-            </button>
-            <button class="w-full bg-white text-blue-600 py-2 rounded border-2 border-blue-600">NO, GUARDAR CAMBIOS</button>
+        <div className="fixed flex items-center justify-center inset-0">
+            <div className="bg-white border-2 p-8 shadow-lg rounded-lg mx-auto" >
+                <h1 className="font-extrabold font-Montserrat text-4xl sm:text-5xl text-center mb-6">Cambios sin guardar</h1>
+                <p className="text-sm sm:text-lg text-gray-600 text-center mb-6 break-words">
+                ¿Estás seguro/a de que quieres volver sin guardar los <br />cambios realizados?
+                </p>
+                <div class="max-w-sm max-h-sm mx-auto ">
+                    <div class="container mx-auto p-4 flex flex-col rounded-lg py-30 space-y-4">
+                        <button 
+                            className=" item-center bg-blue-600 text-white py-3 rounded-full font-bold text-lg"
+                        >
+                            sí, VOLVER
+                        </button>
+                        <button className="w-full bg-white text-blue-600 py-3 rounded-full border-2 border-blue-600 font-bold text-lg mb-[180px]">
+                            NO, GUARDAR CAMBIOS
+                            onClick={handleErrorMessage}
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
