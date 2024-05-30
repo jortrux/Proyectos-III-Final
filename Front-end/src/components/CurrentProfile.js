@@ -139,7 +139,15 @@ export default function CurrentProfile() {
                                     ROLES
                                     </h2>
                                     <div class="flex space-x-2">
-                                        <Tag id={tag}/>
+                                    <div className='flex-column'>
+                                        <h1 className='badge text-center bg-primary rounded-pill rounded-full' style={{backgroundColor: colorFondo}}>&nbsp;2ºB ANIG&nbsp;</h1>
+                                    </div>
+                                    <div className='flex-column'>
+                                        <h1 className='badge text-center bg-primary rounded-pill rounded-full' style={{backgroundColor: colorFondo}}>&nbsp;Animación&nbsp;</h1>
+                                    </div>
+                                    <div className='flex-column'>
+                                        <h1 className='badge text-center bg-primary rounded-pill rounded-full' style={{backgroundColor: colorFondo}}>&nbsp;Representante de Grado&nbsp;</h1>
+                                    </div>
                                     </div>
                                     </div>
                                     <div class="mt-4">

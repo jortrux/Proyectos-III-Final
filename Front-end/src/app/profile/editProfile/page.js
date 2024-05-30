@@ -171,13 +171,13 @@ function EditarPerfil(){
       }
 
     return (
-        <div className="bg-[#FFFFFF] sm:h-[909px]">
+        <div className="bg-[#FFFFFF] lg:h-[909px]">
             <div className={error ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
             <div className={salir ? "fixed inset-0 bg-[#000000] opacity-55 z-40" : "hidden"}></div>
             <div className="opacity-100">
                 <div className="absolute left-2 top-20">
-                    <button className="flex-1 justify-center block font-semibold sm:mt-[25px]">
-                        <div className="sm:w-12 sm:h-12 w-8 h-8">
+                    <button className="flex-1 justify-center block font-semibold lg:mt-[25px]">
+                        <div className="lg:w-12 lg:h-12 w-8 h-8">
                             <Image 
                                 src= {BackArrow} 
                                 width={48} 
@@ -189,19 +189,19 @@ function EditarPerfil(){
                         </div>
                     </button>
                 </div>
-                <div className="text-center max-w-lg max-h-sm mx-auto sm:max-w-xl left-0 top-25  p-1 sm:text-left sm:h-[88px] sm:p-[32px] sm:p-8">
-                    <div className="container mx-auto p-4 flex rounded-lg justify-center sm: p-0">
-                        <h1 className="font-extrabold font-Montserrat text-3xl sm:text-5xl sm:absolute sm:left-20 sm:top-13">Editar perfil</h1>
+                <div className="text-center max-w-lg max-h-sm mx-auto lg:max-w-xl left-0 top-25  p-1 lg:text-left lg:h-[88px] lg:p-[32px] lg:p-8">
+                    <div className="container mx-auto p-4 flex rounded-lg justify-center lg: p-0">
+                        <h1 className="font-extrabold font-Montserrat text-3xl lg:text-5xl lg:absolute lg:left-20 lg:top-13">Editar perfil</h1>
                     </div>
                 </div>
                 
-                    <div className="container mx-auto mt-[-20px] flex flex-col rounded-lg sm:p-[72px]">
-                        <div className="sm:flex-row items-center sm:w-[906px] sm:items-center">
-                            <div className="sm:flex items-center flex-1 ">
-                                <div className="max-w-sm max-h-sm mx-auto h-45 sm: left-0 top-25 max-w-7xl flex-1 sm:p-[36px]">
-                                    <div className="container mx-auto p-4 flex flex-col rounded-lg sm:p-0 sm:h-[288px]">
+                    <div className="container mx-auto mt-[-20px] flex flex-col rounded-lg lg:p-[72px]">
+                        <div className="lg:flex-row items-center lg:w-[906px] lg:items-center">
+                            <div className="lg:flex items-center flex-1 ">
+                                <div className="max-w-sm max-h-sm mx-auto h-45 lg: left-0 top-25 max-w-7xl flex-1 lg:p-[36px]">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg lg:p-0 lg:h-[288px]">
                                         <div className="flex justify-center items-baseline">
-                                            <div className="relative sm:w-60 sm:h-60 w-32 h-32">
+                                            <div className="relative lg:w-60 lg:h-60 w-32 h-32">
                                             <Image 
                                                 src={image} 
                                                 alt="profile picture"
@@ -214,7 +214,7 @@ function EditarPerfil(){
                                                     borderColor: colorFondo // Usando el estado de colorFondo directamente
                                                 }}
                                             />
-                                                <label className="absolute bottom-0 right-0  rounded-full h-[48px] w-[48px] sm:h-[92px] sm:w-[92px]"
+                                                <label className="absolute bottom-0 right-0  rounded-full h-[48px] w-[48px] lg:h-[92px] lg:w-[92px]"
                                                 htmlFor = "selector"
                                                 >
                                                     <svg  viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,13 +233,13 @@ function EditarPerfil(){
                                                 />
                                             </div>
                                         </div>
-                                        <p style={{ fontSize: '18px' }} className="text-xs text-gray-600 mt-2 text-center mb-[-18px] sm:pt-[32px]">
+                                        <p style={{ fontSize: '18px' }} className="text-xs text-gray-600 mt-2 text-center mb-[-18px] lg:pt-[32px]">
                                             La fotografía deberá subirse en formato jpg o .png.
                                         </p>
                                     </div>
                                 </div>
-                                <div className=" max-h-sm mx-auto items-baseline h-[343px] sm: left-0 top-25  flex-1 sm:p-[36px] sm:w-[513px]">
-                                    <div className="container mx-auto p-4 flex flex-col rounded-lg sm:p-0 sm:w-[513px]">
+                                <div className=" max-h-sm mx-auto items-baseline h-[343px] lg: left-0 top-25  flex-1 lg:p-[36px] lg:w-[513px]">
+                                    <div className="container mx-auto p-4 flex flex-col rounded-lg lg:p-0 lg:w-[513px]">
                                         <div className="flex items-center ">
                                             <div className="flex-1">
                                                 <label className="block text-sm font-semibold text-gray-700">Nombre</label>
@@ -262,7 +262,7 @@ function EditarPerfil(){
                                                 />
                                             </div>
                                         </div>
-                                        <div className="mt-4 sm:pt-[32px]">
+                                        <div className="mt-4 lg:pt-[32px]">
                                             <label className="block text-sm font-semibold text-gray-700">BIOGRAFÍA</label>
                                             <textarea 
                                                     placeholder='Biografía' 
@@ -272,7 +272,7 @@ function EditarPerfil(){
                                                     rows="5"
                                                     cols="50" 
                                                 />
-                                            <p className="text-right text-xs text-gray-600">{bio.length}/200 caracteres</p>
+                                            <p className="text-right text-xs text-gray-600">{bioBorrador.length}/200 caracteres</p>
                                         </div>
                                         <div className="flex items-center justify-between mt-4 mt-[-28px] pt-[32px]">
                                             <label className="text-sm text-gray-700 w-3/4 mt-[40px]" for="public_activities">Mostrar en tu perfil público las actividades a las que has asistido</label>
@@ -281,9 +281,9 @@ function EditarPerfil(){
                                     </div>
                                 </div>
                             </div>
-                            <div className="max-w-sm max-h-sm mx-auto sm: left-0 top-25 max-w-sm sm:ml-[-28px] sm:mt-[-20px] ">
+                            <div className="max-w-sm max-h-sm mx-auto lg: left-0 top-25 max-w-sm lg:ml-[-28px] lg:mt-[-20px] ">
 									<div className="container mx-auto p-4 flex flex-col rounded-lg ">
-										<div className="mt-6 space-y-4 sm:ml-[80px]">
+										<div className="mt-6 space-y-4 lg:ml-[80px]">
 											<button 
 											className="w-full bg-white text-blue-600 py-2 rounded border-2"
 											onClick={handleErrorMessage}
@@ -304,8 +304,8 @@ function EditarPerfil(){
             <div className={error ? "fixed inset-0 flex items-center justify-center z-50" : "hidden"}>
                 <div className="fixed flex items-center justify-center inset-0">
                     <div className="bg-white border-2 p-8 shadow-lg rounded-lg mx-auto" >
-                        <h1 className="font-extrabold font-Montserrat text-4xl sm:text-5xl text-center mb-6">Cerrar sesión</h1>
-                        <p className="text-sm sm:text-lg text-gray-600 text-center mb-6 break-words">
+                        <h1 className="font-extrabold font-Montserrat text-4xl lg:text-5xl text-center mb-6">Cerrar sesión</h1>
+                        <p className="text-sm lg:text-lg text-gray-600 text-center mb-6 break-words">
                         ¿Estás seguro/a de que quieres cerrar sesión?
                         </p>
                         <div className="max-w-sm max-h-sm mx-auto ">
@@ -326,8 +326,8 @@ function EditarPerfil(){
             <div className={salir ? "fixed inset-0 flex items-center justify-center z-50" : "hidden"}>
             <div className="fixed flex items-center justify-center inset-0">
             <div className="bg-white border-2 p-8 shadow-lg rounded-lg mx-auto" >
-                <h1 className="font-extrabold font-Montserrat text-4xl sm:text-5xl text-center mb-6">Cambios sin guardar</h1>
-                <p className="text-sm sm:text-lg text-gray-600 text-center mb-6 break-words">
+                <h1 className="font-extrabold font-Montserrat text-4xl lg:text-5xl text-center mb-6">Cambios sin guardar</h1>
+                <p className="text-sm lg:text-lg text-gray-600 text-center mb-6 break-words">
                 ¿Estás seguro/a de que quieres volver sin guardar los <br />cambios realizados?
                 </p>
                 <div className="max-w-sm max-h-sm mx-auto ">
