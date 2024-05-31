@@ -14,7 +14,7 @@ const createItem = async (req, res) => {
         //crear foro asociado
         //notificar a los usuarios requeridos
 
-        await activityModel.create(body)
+        await activityModel.create(req)
         
 
         res.status(200).send()  
@@ -48,14 +48,7 @@ const addActivity = async (req, res) => {
         const updatedUser = await usersModel.findByIdAndUpdate(
             user._id,
             {
-                $addToSet: {
-                    enrolledActivities: {
-                        $each: [{
-                            activityId: req._id
-                        }],
-                        $ne: { activityId: req._id }
-                    }
-                }
+                $addToSet: {enrolledActivities: req.id}
             },
             { new: true }
         )
@@ -91,9 +84,7 @@ const lessActivity = async (req, res) => {
             user._id,
             {
                 $pull: {
-                    enrolledActivities: {
-                        activityId: req._id
-                    }
+                    enrolledActivities: req.id
                 }
             },
             { new: true }
@@ -124,8 +115,8 @@ const getForCommunity = async (req, res) => {
     try {
         req = matchedData(req)
 
-        const activities = await activityModel.find({ community: req.id })
-        
+        const activities = await activityModel.find({ community: req.id, active: true })
+
         res.status(200).send(activities)  
     }catch(err) {
         console.log(err)
@@ -139,7 +130,7 @@ const getActivity = async (req, res) => {
 
         const activity = await activityModel.findOne({ _id: req.id })
         
-
+        
         res.status(200).send(activity)  
     }catch(err) {
         console.log(err)
@@ -147,5 +138,52 @@ const getActivity = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+        const user = req.user
+        req = matchedData(req)
 
-module.exports = { createItem, addActivity, lessActivity, getItems, getForCommunity, getActivity }
+        const activities = await activityModel.find({ _id: { $in: user.enrolledActivities }})
+        
+        res.status(200).send(activities)  
+    }catch(err) {
+        console.log(err)
+        handleHttpError(res, "ERROR_GET_ACTIVITIES")
+    }
+}
+
+const getEmails = async (req, res) => {
+    try {
+        req = matchedData(req)
+
+        const emails = await usersModel.find({ email: { $regex: req.email, $options: 'i' } })
+        .select("_id email name firstSurname secondSurname")
+        
+        res.status(200).send(emails)  
+    }catch(err) {
+        console.log(err)
+        handleHttpError(res, "ERROR_CREATE_ACTIVITY")
+    }
+}
+
+const addInActivity = async (req, res) => {
+    try {
+        const user = req.user
+        req = matchedData(req)
+
+        await activityModel.findByIdAndUpdate(
+            req.id,
+            { $set: { 'mandatoryParticipants.$[elemento].confirmed': true } },
+            { new: true, arrayFilters: [{ 'elemento.userId': user._id }] }
+          )
+        
+        res.status(200).send()  
+    }catch(err) {
+        console.log(err)
+        handleHttpError(res, "ERROR_ADD_TO_ACTIVITY")
+    }
+}
+
+
+module.exports = { createItem, addActivity, lessActivity, getItems, getForCommunity, getActivity, 
+    getUser, getEmails, addInActivity }

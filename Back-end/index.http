@@ -4,7 +4,7 @@ Content-Type: application/json
 {
 
     "email": "pablo.izquierdo2@live.u-tad.com",
-    "password": "pablo"
+    "password": "hola1234"
   
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 {
 
     "_id": "65d39314c1f7f0c0f8187b82",
-    "recoveryCode": 242333
+    "recoveryCode": 914002
   
 }
 

@@ -13,6 +13,11 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
     content: String,
+    forum: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Forum',
+        default: null
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

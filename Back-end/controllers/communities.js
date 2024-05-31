@@ -128,7 +128,7 @@ const searcher = async (req, res) => {
         
         if(req.student){
             students = await usersModel.find({
-                /*role: "alumno",*/
+                role: "alumno",
                 $or: [
                     { name: { $regex: new RegExp(req.search, 'i') } },
                     { firstSurname: { $regex: new RegExp(req.search, 'i') } },

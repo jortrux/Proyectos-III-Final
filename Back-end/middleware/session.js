@@ -15,19 +15,18 @@ const authMiddleware = async (req, res, next) => {
         const comprobacion = await tokenModel.findOne({
             token: token
         })
-        
+
         if(!comprobacion){
             handleHttpError(res, "NOT_VALID_TOKEN", 401)
             return
         }
-
+        
         const dataToken = await verifyToken(token)
         
         if(!dataToken){
             handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
             return
         }
-        
         const user = await usersModel.findOne({
             email: dataToken.email
         }) 

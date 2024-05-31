@@ -5,6 +5,7 @@ const Tokens = require('./mongodb/token');
 const communities = require('./mongodb/communities');
 const Activity = require('./mongodb/activities');
 const Forum = require('./mongodb/forum');
+const forbidden = require('./mongodb/forbiddenWords');
 // Add more models as needed
 
 // Export all the models as an object
@@ -16,5 +17,6 @@ module.exports = {
   activityModel: Activity,
   forumModel: Forum,
   postModel: Post,
+  forbiddenModel: forbidden
   // Add more models as needed
 };

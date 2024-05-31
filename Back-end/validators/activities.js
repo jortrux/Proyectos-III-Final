@@ -4,7 +4,7 @@ const validateResults = require("../utils/handleValidator")
 const validatorCreate = [
     check("title").exists().notEmpty(),
     check("description").exists().notEmpty().isLength( {min:8, max: 200} ),
-    check("community").notEmpty(),
+    check("community").optional().notEmpty(),
     check("type").exists().notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
@@ -18,4 +18,19 @@ const validatorId = [
     }
 ]
 
-module.exports = { validatorCreate, validatorId }
+const validatorString = [
+    check("email").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorConfirm = [
+    check("token").exists().notEmpty(),
+    check("id").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorCreate, validatorId, validatorString, validatorConfirm }

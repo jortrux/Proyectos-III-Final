@@ -10,6 +10,16 @@ const tokenSign = async (user) => {
     return sign
 }
 
+const tokenSign2 = async (user) => {
+    const sign = jwt.sign(
+        {
+            email: user.email
+        },
+        process.env.JWT_SECRET2
+    )
+    return sign
+}
+
 const verifyToken = async (tokenJwt) => {
     try {
         return jwt.verify(tokenJwt, process.env.JWT_SECRET)
@@ -18,4 +28,12 @@ const verifyToken = async (tokenJwt) => {
     }
 }
 
-module.exports = { tokenSign, verifyToken }
+const verifyToken2 = async (tokenJwt) => {
+    try {
+        return jwt.verify(tokenJwt, process.env.JWT_SECRET2)
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+module.exports = { tokenSign, tokenSign2, verifyToken, verifyToken2 }

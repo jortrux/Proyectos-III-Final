@@ -8,7 +8,20 @@ const getInfo = async (req, res) => {
     try {
 
        var user = req.user
-       user = {...user, password, email, passwordRecovery, recoveryCode, registered, allowRemainders, favForums, enrolledActivities, communities, posts}
+
+       user.set({
+        password: "",
+        email: "",
+        passwordRecovery: undefined,
+        recoveryCode: undefined,
+        registered: undefined,
+        allowRemainders: undefined,
+        favForums: undefined,
+        enrolledActivities: undefined,
+        communities: undefined,
+        posts: undefined
+        }, { strict: false })
+
        res.send(user)
     }catch(err) {
         console.log(err)
@@ -74,4 +87,18 @@ const getNotifications = async (req, res) => {
     }
 }
 
-module.exports = { getInfo, changeInfo, changePassword, updatePhoto, getNotifications }
+const getOtherInfo = async (req, res) => {
+    try {
+        req = matchedData(req)
+       
+        const user = await usersModel.findById(req.id)
+        .select("name firstSurname secondSurname gender email description interests charge role degree course avatar favForums enrolledActivities communities posts")
+        
+        res.send(user)
+    }catch(err) {
+        console.log(err)
+        handleHttpError(res, "ERROR_GET_INFO")
+    }
+}
+
+module.exports = { getInfo, changeInfo, changePassword, updatePhoto, getNotifications, getOtherInfo }

@@ -213,7 +213,7 @@ const passwordEmail = async (req, res) => {
         const user = await usersModel.findOne({
             email: req.email
         })
-        
+
         if(!user){
             handleHttpError(res, "USER_NOT_EXISTS", 404)
             return
@@ -226,11 +226,11 @@ const passwordEmail = async (req, res) => {
         codigo = generador()
 
         await usersModel.updateOne({ _id: user._id }, { $set: { passwordRecovery: true , recoveryCode: codigo} } )
-        
+
         const textoPersonalizado = ejs.render('<h1><%= codigo %> </h1>', {codigo})
         sendEmail(user.email, 'codigo', textoPersonalizado)
-
-        res.status(200).send()
+        
+        res.status(200).send() 
 
     }catch(err){
         console.log(err)
@@ -238,5 +238,50 @@ const passwordEmail = async (req, res) => {
     }
 }
 
+const loginCtrl2 = async (req, res) => {
+    try {
+        req = matchedData(req)
+        //añadir comprobacion de correo de utad
+        const user = await usersModel.findOne({
+            secondEmail: req.email
+        })
 
-module.exports = { registerCtrl, loginCtrl, codeVerification, newPassword, passwordCode, passwordEmail }
+        if(!user){
+            handleHttpError(res, "USER_NOT_EXISTS", 404)
+            return
+        }
+        /*else if(!user.resgister){
+            handleHttpError(res, "USER_NOT_REGISTER", 404)
+            return
+        }*/
+        
+        const hashPassword = user.password;
+        const check = await compare(req.password, hashPassword)
+
+        if(!check){
+            handleHttpError(res, "INVALID_PASSWORD", 401)
+            return
+        }
+
+        //crear codigo, añadirlo a bbdd y enviar correo
+        codigo= generador()
+        await usersModel.updateOne({ _id: user._id }, { $set: { recoveryCode: codigo } }) 
+        const textoPersonalizado = ejs.render('<h1><%= codigo %> </h1>', {codigo})
+        sendEmail(user.secondEmail, 'codigo', textoPersonalizado)
+
+
+        const data = {
+            id: user._id
+        }
+        
+        res.send(data)
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_LOGIN_USER")
+    }
+}
+
+
+module.exports = { registerCtrl, loginCtrl, codeVerification, newPassword, passwordCode, 
+    passwordEmail, loginCtrl2 }

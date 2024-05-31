@@ -18,16 +18,16 @@ const validatorReply = [
 ]
 
 const validatorId = [
-    check("_id").exists().notEmpty(),
+    check("id").exists().notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
 ]
 
 const validatorReport = [
-    check("_id").exists().notEmpty(),
+    check("id").exists().notEmpty(),
     check("reason").exists().notEmpty(),
-    check("comment").notEmpty(),
+    check("comment").optional().notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }

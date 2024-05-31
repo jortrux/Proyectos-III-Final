@@ -21,4 +21,13 @@ const validatorPassword = [
     }
 ]
 
-module.exports = { validatorChange, validatorPassword }
+const validatorId = [
+
+    check("id").exists().notEmpty(),
+
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorChange, validatorPassword, validatorId }

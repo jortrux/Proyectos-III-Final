@@ -12,4 +12,4 @@ const ForbiddenWordSchema = new mongoose.Schema(
 )
 
 
-module.exports = mongoose.model("Forum", ForbiddenWordSchema);
+module.exports = mongoose.model("Forbidden", ForbiddenWordSchema);
